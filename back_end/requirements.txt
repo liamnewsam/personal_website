@@ -1,6 +1,5 @@
 flask
-flas-cors
+Flask-CORS
 Pillow
 numpy
-uvicorn
 gunicorn
