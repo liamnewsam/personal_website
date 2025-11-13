@@ -39,11 +39,10 @@ model_loaded.load_state_dict(torch.load("smallcnn.pth"))
 model_loaded.eval()
 
 
-def predict_digit(data):
-
-    img_data = data["image"].split(",")[1]  # remove data URL prefix
+def predict_digit(image_base64):
+    img_data = image_base64.split(",")[1]  # remove data URL prefix
     img = Image.open(io.BytesIO(base64.b64decode(img_data))).convert("L").resize((28, 28))
-    arr = np.array(img) / 255.0
+    arr = np.array(img, dtype=np.float32) / 255.0
     logits = model_loaded(arr.reshape(1, 1, 28, 28))
     probs = F.softmax(logits, dim=1)
     print(probs)
