@@ -1,7 +1,10 @@
-from flask import Flask, request, jsonify
 from digit_prediction import predict_digit
+#---------
+from flask import Flask, request, jsonify
+from flask_cors import CORS  # NEW
 
 app = Flask(__name__)
+CORS(app)  # NEW — enables CORS for all domains by default
 
 @app.route("/digit-predict", methods=["POST"])
 def handle_digit():

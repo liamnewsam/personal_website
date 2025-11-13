@@ -1,4 +1,5 @@
 flask
+flas-cors
 Pillow
 numpy
 uvicorn
