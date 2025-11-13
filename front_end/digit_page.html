@@ -12,9 +12,9 @@
   }
 
   #canvas-container {
-    width: 90vw;               /* responsive width */
-    max-width: 420px;          /* limit size on large screens */
-    aspect-ratio: 1 / 1;       /* always a perfect square */
+    width: 90vw;               /* much bigger on mobile */
+    max-width: 480px;          /* nice size on desktop */
+    aspect-ratio: 1 / 1;
     border: 2px solid #444;
     border-radius: 8px;
   }
@@ -22,7 +22,7 @@
   #canvas {
     width: 100%;
     height: 100%;
-    touch-action: none;         /* disable scroll/pinch while drawing */
+    touch-action: none;
     display: block;
   }
 
@@ -36,14 +36,14 @@
     cursor: pointer;
     margin: 4px;
   }
-
   button:hover {
     background: #555;
   }
 </style>
 
 <div id="canvas-container">
-  <canvas id="canvas" width="280" height="280"></canvas>
+  <!-- INTERNAL resolution is much bigger -->
+  <canvas id="canvas" width="600" height="600"></canvas>
 </div>
 
 <div>
@@ -65,20 +65,28 @@ function resetCanvas() {
 }
 resetCanvas();
 
-// ------------------ DRAWING HELPERS ------------------
+// ------------------ POSITION HELPERS ------------------
 function getPos(e) {
+  const rect = canvas.getBoundingClientRect();
+  const scaleX = canvas.width / rect.width;
+  const scaleY = canvas.height / rect.height;
+
   if (e.touches) {
-    const rect = canvas.getBoundingClientRect();
     return {
-      x: (e.touches[0].clientX - rect.left) * (canvas.width / rect.width),
-      y: (e.touches[0].clientY - rect.top) * (canvas.height / rect.height)
+      x: (e.touches[0].clientX - rect.left) * scaleX,
+      y: (e.touches[0].clientY - rect.top) * scaleY
     };
   }
-  return { x: e.offsetX, y: e.offsetY };
+
+  return {
+    x: e.offsetX * scaleX,
+    y: e.offsetY * scaleY
+  };
 }
 
+// ------------------ DRAWING EVENTS ------------------
 function startDraw(e) {
-  e.preventDefault();       // stop scrolling
+  e.preventDefault();
   drawing = true;
 
   const { x, y } = getPos(e);
@@ -91,7 +99,7 @@ function moveDraw(e) {
 
   const { x, y } = getPos(e);
 
-  ctx.lineWidth = 20;
+  ctx.lineWidth = 40; // bigger brush for bigger canvas
   ctx.lineCap = "round";
   ctx.strokeStyle = "white";
 
@@ -103,13 +111,11 @@ function endDraw() {
   drawing = false;
 }
 
-// ------------------ MOUSE EVENTS ------------------
 canvas.addEventListener('mousedown', startDraw);
 canvas.addEventListener('mousemove', moveDraw);
 canvas.addEventListener('mouseup', endDraw);
 canvas.addEventListener('mouseleave', endDraw);
 
-// ------------------ TOUCH EVENTS ------------------
 canvas.addEventListener('touchstart', startDraw, { passive: false });
 canvas.addEventListener('touchmove', moveDraw, { passive: false });
 canvas.addEventListener('touchend', endDraw);
@@ -120,7 +126,16 @@ document.getElementById('erase').addEventListener('click', resetCanvas);
 
 // ------------------ PREDICT BUTTON ------------------
 document.getElementById('predict').addEventListener('click', async () => {
-  const dataUrl = canvas.toDataURL('image/png');
+  // STEP 1: Create downscaled 280×280 canvas
+  const small = document.createElement('canvas');
+  small.width = 280;
+  small.height = 280;
+  const sctx = small.getContext('2d');
+
+  sctx.drawImage(canvas, 0, 0, 280, 280);
+
+  // STEP 2: Convert to PNG for backend
+  const dataUrl = small.toDataURL('image/png');
 
   const response = await fetch(
     'https://personal-website-40217740204.europe-west1.run.app/digit-predict',
@@ -135,4 +150,3 @@ document.getElementById('predict').addEventListener('click', async () => {
   document.getElementById('result').innerText = `Prediction: ${result.digit}`;
 });
 </script>
-
