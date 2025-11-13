@@ -39,7 +39,7 @@ model_loaded.load_state_dict(torch.load("smallcnn.pth"))
 model_loaded.eval()
 
 
-def predict(data):
+def predict_digit(data):
 
     img_data = data["image"].split(",")[1]  # remove data URL prefix
     img = Image.open(io.BytesIO(base64.b64decode(img_data))).convert("L").resize((28, 28))
