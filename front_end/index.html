@@ -1,1 +1,79 @@
-hi
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Liam Newsam | Portfolio</title>
+  <link rel="stylesheet" href="style.css" />
+  <script defer src="script.js"></script>
+</head>
+<body>
+  <header>
+    <nav>
+      <h1 class="logo">Liam Newsam</h1>
+      <ul class="nav-links">
+        <li><a href="#about">About</a></li>
+        <li><a href="#projects">Projects</a></li>
+        <li><a href="#contact">Contact</a></li>
+      </ul>
+    </nav>
+  </header>
+
+  <section id="hero">
+    <div class="hero-content">
+      <img src="profile.jpg" alt="Profile photo of Liam Newsam" class="profile-pic" />
+      <h2>Hi, I’m Liam — a student, developer, and builder.</h2>
+      <p>Welcome to my personal website where I share my projects, interests, and ideas.</p>
+    </div>
+  </section>
+
+  <section id="about" class="section">
+    <h2>About Me</h2>
+    <p>
+      I’m a UC Berkeley sophomore interested in computer systems, web development, and machine learning.
+      I love building practical tools and experimenting with technology that connects people and data.
+    </p>
+  </section>
+
+  <section id="projects" class="section">
+    <h2>Projects</h2>
+    <div class="projects-grid">
+      <div class="project-card" onclick="goToProject('project1.html')">
+        <img src="project1-thumb.jpg" alt="Screenshot of project 1" />
+        <div class="project-info">
+          <h3>Clipboard Annotator</h3>
+          <p>A Pygame tool for annotating clipboard text using templates and hotkeys.</p>
+        </div>
+      </div>
+      <div class="project-card" onclick="goToProject('project2.html')">
+        <img src="project2-thumb.jpg" alt="Screenshot of project 2" />
+        <div class="project-info">
+          <h3>Housing Study System</h3>
+          <p>Automated Craigslist outreach and personalized participant dashboards.</p>
+        </div>
+      </div>
+      <div class="project-card" onclick="goToProject('project3.html')">
+        <img src="project3-thumb.jpg" alt="Screenshot of project 3" />
+        <div class="project-info">
+          <h3>Image Segmentation Grid</h3>
+          <p>Visualization tool that zooms in on masked regions within image datasets.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section id="contact" class="section">
+    <h2>Contact</h2>
+    <p>Feel free to reach out if you’d like to connect or collaborate!</p>
+    <ul class="contact-list">
+      <li>Email: <a href="mailto:liam.news@example.com">liam.news@example.com</a></li>
+      <li>GitHub: <a href="https://github.com/liamnewsam" target="_blank">github.com/liamnewsam</a></li>
+      <li>LinkedIn: <a href="https://linkedin.com/in/liamnewsam" target="_blank">linkedin.com/in/liamnewsam</a></li>
+    </ul>
+  </section>
+
+  <footer>
+    <p>© 2025 Liam Newsam. All rights reserved.</p>
+  </footer>
+</body>
+</html>
