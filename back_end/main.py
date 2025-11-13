@@ -18,5 +18,6 @@ def handle_digit():
     except Exception as e:
         print("Error in /digit-predict:", e)
         return jsonify({"error": str(e)}), 500
-if __name__ == "__main__":
-    app.run(host="0.0.0.0", port=5000)
+
+#if __name__ == "__main__":
+#    app.run(host="0.0.0.0", port=5000)
