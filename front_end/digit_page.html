@@ -1,5 +1,6 @@
 <style>
   body {
+    margin: 0;
     background: #111;
     color: white;
     font-family: sans-serif;
@@ -7,17 +8,26 @@
     flex-direction: column;
     align-items: center;
     gap: 12px;
-    padding-top: 20px;
+    padding: 20px 0;
+  }
+
+  #canvas-container {
+    width: 90vw;               /* responsive width */
+    max-width: 420px;          /* limit size on large screens */
+    aspect-ratio: 1 / 1;       /* always a perfect square */
+    border: 2px solid #444;
+    border-radius: 8px;
   }
 
   #canvas {
-    border: 2px solid #444;
-    border-radius: 8px;
-    cursor: crosshair;
+    width: 100%;
+    height: 100%;
+    touch-action: none;         /* disable scroll/pinch while drawing */
+    display: block;
   }
 
   button {
-    padding: 8px 16px;
+    padding: 10px 18px;
     border: none;
     background: #333;
     color: white;
@@ -26,12 +36,15 @@
     cursor: pointer;
     margin: 4px;
   }
+
   button:hover {
     background: #555;
   }
 </style>
 
-<canvas id="canvas" width="280" height="280"></canvas>
+<div id="canvas-container">
+  <canvas id="canvas" width="280" height="280"></canvas>
+</div>
 
 <div>
   <button id="predict">Predict</button>
@@ -43,42 +56,69 @@
 <script>
 const canvas = document.getElementById('canvas');
 const ctx = canvas.getContext('2d');
-
 let drawing = false;
 
-// ----- Initial black background -----
+// ------------------ INITIAL BLACK BACKGROUND ------------------
 function resetCanvas() {
   ctx.fillStyle = "black";
   ctx.fillRect(0, 0, canvas.width, canvas.height);
 }
 resetCanvas();
 
-// ----- Drawing Logic -----
-canvas.addEventListener('mousedown', e => {
+// ------------------ DRAWING HELPERS ------------------
+function getPos(e) {
+  if (e.touches) {
+    const rect = canvas.getBoundingClientRect();
+    return {
+      x: (e.touches[0].clientX - rect.left) * (canvas.width / rect.width),
+      y: (e.touches[0].clientY - rect.top) * (canvas.height / rect.height)
+    };
+  }
+  return { x: e.offsetX, y: e.offsetY };
+}
+
+function startDraw(e) {
+  e.preventDefault();       // stop scrolling
   drawing = true;
+
+  const { x, y } = getPos(e);
   ctx.beginPath();
-  ctx.moveTo(e.offsetX, e.offsetY);
-});
+  ctx.moveTo(x, y);
+}
 
-canvas.addEventListener('mouseup', () => drawing = false);
-
-canvas.addEventListener('mousemove', e => {
+function moveDraw(e) {
   if (!drawing) return;
+
+  const { x, y } = getPos(e);
 
   ctx.lineWidth = 20;
   ctx.lineCap = "round";
   ctx.strokeStyle = "white";
 
-  ctx.lineTo(e.offsetX, e.offsetY);
+  ctx.lineTo(x, y);
   ctx.stroke();
-});
+}
 
-// ----- Erase Button -----
-document.getElementById('erase').addEventListener('click', () => {
-  resetCanvas();
-});
+function endDraw() {
+  drawing = false;
+}
 
-// ----- Predict Button -----
+// ------------------ MOUSE EVENTS ------------------
+canvas.addEventListener('mousedown', startDraw);
+canvas.addEventListener('mousemove', moveDraw);
+canvas.addEventListener('mouseup', endDraw);
+canvas.addEventListener('mouseleave', endDraw);
+
+// ------------------ TOUCH EVENTS ------------------
+canvas.addEventListener('touchstart', startDraw, { passive: false });
+canvas.addEventListener('touchmove', moveDraw, { passive: false });
+canvas.addEventListener('touchend', endDraw);
+canvas.addEventListener('touchcancel', endDraw);
+
+// ------------------ ERASE BUTTON ------------------
+document.getElementById('erase').addEventListener('click', resetCanvas);
+
+// ------------------ PREDICT BUTTON ------------------
 document.getElementById('predict').addEventListener('click', async () => {
   const dataUrl = canvas.toDataURL('image/png');
 
@@ -95,3 +135,4 @@ document.getElementById('predict').addEventListener('click', async () => {
   document.getElementById('result').innerText = `Prediction: ${result.digit}`;
 });
 </script>
+
