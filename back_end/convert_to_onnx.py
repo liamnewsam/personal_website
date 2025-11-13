@@ -1,4 +1,4 @@
-import torch
+#import torch
 from digit_prediction import SmallCNN
 
 model = SmallCNN()
