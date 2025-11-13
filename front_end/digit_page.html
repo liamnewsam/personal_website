@@ -16,7 +16,7 @@
     cursor: crosshair;
   }
 
-  #predict {
+  button {
     padding: 8px 16px;
     border: none;
     background: #333;
@@ -24,14 +24,20 @@
     font-size: 16px;
     border-radius: 6px;
     cursor: pointer;
+    margin: 4px;
   }
-  #predict:hover {
+  button:hover {
     background: #555;
   }
 </style>
 
 <canvas id="canvas" width="280" height="280"></canvas>
-<button id="predict">Predict</button>
+
+<div>
+  <button id="predict">Predict</button>
+  <button id="erase">Erase</button>
+</div>
+
 <p id="result"></p>
 
 <script>
@@ -39,9 +45,8 @@ const canvas = document.getElementById('canvas');
 const ctx = canvas.getContext('2d');
 
 let drawing = false;
-let hasDrawn = false; // Track if canvas should be cleared on next draw
 
-// ----- Setup black background -----
+// ----- Initial black background -----
 function resetCanvas() {
   ctx.fillStyle = "black";
   ctx.fillRect(0, 0, canvas.width, canvas.height);
@@ -51,21 +56,11 @@ resetCanvas();
 // ----- Drawing Logic -----
 canvas.addEventListener('mousedown', e => {
   drawing = true;
-
-  // If there's existing drawing, clear when starting a new stroke
-  if (hasDrawn) {
-    resetCanvas();
-  }
-
-  hasDrawn = true;
-
   ctx.beginPath();
   ctx.moveTo(e.offsetX, e.offsetY);
 });
 
-canvas.addEventListener('mouseup', () => {
-  drawing = false;
-});
+canvas.addEventListener('mouseup', () => drawing = false);
 
 canvas.addEventListener('mousemove', e => {
   if (!drawing) return;
@@ -76,6 +71,11 @@ canvas.addEventListener('mousemove', e => {
 
   ctx.lineTo(e.offsetX, e.offsetY);
   ctx.stroke();
+});
+
+// ----- Erase Button -----
+document.getElementById('erase').addEventListener('click', () => {
+  resetCanvas();
 });
 
 // ----- Predict Button -----
