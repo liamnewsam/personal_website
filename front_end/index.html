@@ -8,13 +8,14 @@
 
 <body>
 
-  <div class="home-container">
+  <!-- Two-column grid -->
+  <div class="home-grid">
 
-    <!-- LEFT SIDE -->
-    <div class="home-left">
+    <!-- LEFT COLUMN -->
+    <div class="left-column">
       <img src="/images/me.jpg" alt="My face" class="responsive-img">
 
-      <div class="card">
+      <div class="card contact-card">
         <h2>Contact</h2>
         <p>Email: you@email.com</p>
         <p>GitHub: github.com/yourname</p>
@@ -22,32 +23,33 @@
       </div>
     </div>
 
-    <!-- ABOUT ME -->
-    <div class="home-about">
-      <h1>Hi, I'm Liam.</h1>
-      <p>
-        I'm a CS student specializing in software engineering, systems, and tooling.
-        This site showcases my favorite projects, demos, and work.
-      </p>
-    </div>
+    <!-- RIGHT COLUMN -->
+    <div class="right-column">
 
-    <!-- PROJECTS -->
-    <div class="home-projects">
-      <h2>Projects</h2>
+      <section class="home-about">
+        <h1>Hi, I'm Liam.</h1>
+        <p>
+          I'm a CS student specializing in software engineering, systems, and tooling.
+          This site showcases my favorite projects, demos, and work.
+        </p>
+      </section>
 
-      <div class="grid-3">
-        <a href="/projects/example-project.html" class="card project-tile">
-          <img src="/images/project-thumb.jpg" class="responsive-img">
-          <h3>Example Project</h3>
-          <p>A short description of what it does.</p>
-        </a>
-      </div>
+      <section class="home-projects">
+        <h2>Projects</h2>
+
+        <div class="projects-grid">
+          <a href="/projects/example-project.html" class="card project-tile">
+            <img src="/images/project-thumb.jpg" class="responsive-img">
+            <h3>Example Project</h3>
+            <p>A short description of what it does.</p>
+          </a>
+        </div>
+      </section>
 
     </div>
 
   </div>
 
-  <!-- Include JS -->
   <script type="module" src="/js/script.js"></script>
 </body>
 </html>
