@@ -275,9 +275,7 @@ h1, h2 {
   min-width: 0;   /* prevents flex overflow issues */
 }
 /* Canvas styling */
-#canvas-container {
-  flex: 0 0 300px;   /* don’t grow, don’t shrink, fixed 300px width */
-}
+
 
 #canvas {
   width: 100%;
