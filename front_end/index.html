@@ -3,70 +3,67 @@
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width,initial-scale=1" />
-  <title>Liam Newsam — Software & Projects</title>
+  <title>Your Name — Portfolio</title>
 
-  <!-- Fonts: replace or add here -->
+  <!-- Fonts -->
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;600;800&family=Roboto+Mono:wght@400;700&display=swap" rel="stylesheet">
 
-  <link rel="stylesheet" href="styles.css" />
+  <link rel="stylesheet" href="styles.css">
 </head>
 <body>
-  <main class="page grid-root">
-    <!-- LEFT COLUMN: headshot + contact -->
-    <aside class="left-col card-brutalist">
-      <div class="face-wrap">
-        <!-- Replace src with your face picture -->
-        <img src="images/face.jpg" alt="Liam Newsam face photo" class="face-photo">
+  <div class="site">
+    <!-- Left column: face + contact -->
+    <aside class="col left-col card">
+      <div class="face-outer">
+        <!-- Replace with your face image -->
+        <img class="face" src="images/face.jpg" alt="Your face photo">
       </div>
 
       <div class="contact">
-        <h2 class="name">Liam Newsam</h2>
-        <p class="role">CS Student • Systems & Web</p>
+        <h1 class="name">Your Name</h1>
+        <p class="role">CS Student — Systems & Web</p>
 
         <ul class="contact-list">
-          <li><strong>Email</strong>: <a href="mailto:liam@example.com">liam@example.com</a></li>
+          <li><strong>Email</strong>: <a href="mailto:you@example.com">you@example.com</a></li>
           <li><strong>GitHub</strong>: <a href="https://github.com/your-username" target="_blank" rel="noopener">github.com/your-username</a></li>
           <li><strong>Resume</strong>: <a href="/resume.pdf" target="_blank" rel="noopener">PDF</a></li>
         </ul>
 
-        <div class="left-actions">
-          <a class="btn raw" href="mailto:liam@example.com">Email me</a>
-          <a class="btn raw ghost" href="/contact.html">Contact</a>
+        <div class="actions">
+          <a class="btn primary" href="mailto:you@example.com">Email</a>
+          <a class="btn ghost" href="/contact.html">Contact</a>
         </div>
       </div>
     </aside>
 
-    <!-- RIGHT COLUMN -->
-    <section class="right-col">
-      <!-- TOP RIGHT: About / description -->
-      <header class="bio card-brutalist">
-        <h1 class="bio-title">About</h1>
+    <!-- Right column: bio + projects -->
+    <main class="col right-col">
+      <section class="card bio-card">
+        <h2 class="bio-title">About</h2>
         <p class="bio-text">
-          I’m a second-year computer science student interested in building practical, well-tested systems and intuitive front-end tools. I focus on clean abstractions, reproducible experiments, and readable code.
+          I'm a computer science student building systems and web tools. I favour clarity, small abstractions, and readable code. Open to internships and interesting problems.
         </p>
 
-        <ul class="skills-list">
+        <ul class="skill-list">
           <li>Languages: C, Python, JavaScript</li>
-          <li>Interests: OS / concurrency, web systems, tooling</li>
-          <li>Open to internships & side projects</li>
+          <li>Interests: Operating Systems, Tooling, Front-end UX</li>
+          <li>Looking for: internships & open-source collabs</li>
         </ul>
-      </header>
+      </section>
 
-      <!-- BOTTOM RIGHT: Projects -->
-      <section class="projects card-brutalist">
-        <h2 class="projects-title">Selected Projects</h2>
-
-        <!-- grid of tiles -->
-        <div id="projectGrid" class="project-grid" aria-live="polite">
-          <!-- Tiles inserted by script.js -->
+      <section class="card projects-card">
+        <div class="projects-header">
+          <h3>Selected Projects</h3>
+          <p class="projects-sub">Click a tile to open the project page.</p>
         </div>
 
-        <p class="projects-note">Click a tile to open the project.</p>
+        <!-- grid gets rendered by script.js -->
+        <div id="projectGrid" class="project-grid" role="list" aria-label="projects"></div>
       </section>
-    </section>
-  </main>
+    </main>
+  </div>
 
-  <script src="script.js"></script>
+  <script src="script.js" defer></script>
 </body>
 </html>
