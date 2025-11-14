@@ -27,6 +27,8 @@ body {
 .home-grid {
   display: grid;
   grid-template-columns: 280px 800px;
+  gap: 2rem;       /* adds 2rem horizontal & vertical spacing between grid items */
+
   align-items: start;              /* prevents stretching */
 }
 
