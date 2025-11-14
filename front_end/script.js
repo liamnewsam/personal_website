@@ -7,25 +7,11 @@
 
 const PROJECTS = [
   {
-    id: "sys-tools",
-    title: "OS Tools",
-    desc: "CLI utilities for scheduling experiments & tracing.",
-    thumb: "images/sys-tools.png",
-    color: "var(--accent-2)"   // uses CSS variable names from styles.css
-  },
-  {
     id: "digit-predict",
     title: "Digit Classifier",
     desc: "Small CNN with visual explanations and demo.",
     thumb: "images/digit.png",
     color: "var(--accent-1)"
-  },
-  {
-    id: "drawing-canvas",
-    title: "Canvas Draw",
-    desc: "Responsive drawing canvas with export & gestures.",
-    thumb: "images/canvas.png",
-    color: "var(--accent-3)"
   },
   {
     id: "housing-study",
