@@ -26,7 +26,7 @@ body {
 
 .home-grid {
   display: grid;
-  grid-template-columns: 280px 500px;
+  grid-template-columns: 280px 800px;
   align-items: start;              /* prevents stretching */
 }
 
