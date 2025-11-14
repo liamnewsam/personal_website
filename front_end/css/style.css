@@ -190,6 +190,7 @@ h1, h2 {
    ============================================================ */
 
 .project-page {
+  width: 1200px;
   max-width: var(--content-max);
   margin: 0 auto;
   padding: 2rem;
