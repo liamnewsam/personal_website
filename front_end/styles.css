@@ -1,161 +1,118 @@
-/* ============================================================
-   COLOR SYSTEM — edit these 6 vars to recolor the whole site
-   ============================================================ */
+/* --------------------------------------------
+   GLOBAL VARIABLES (easy to modify)
+--------------------------------------------- */
 :root {
-  --bg: #faf9f6;
+  --bg: #fdfdfd;
   --text: #111;
-  --muted: #666;
 
-  --accent-1: #ff4d4f;   /* Red */
-  --accent-2: #3f8efc;   /* Blue */
-  --accent-3: #00b894;   /* Green */
-  --accent-4: #f39c12;   /* Orange */
-
+  --color-accent: #ff3b3b;   /* brutalist red */
+  --color-accent2: #008aff;  /* bold blue */
+  --color-accent3: #2ecc71;  /* soft brutal green */
+  --color-border: #000;
+  
   --tile-bg: #fff;
-  --tile-hover: #f0f0f0;
-  --border: #000;
+  --tile-bg-hover: #ffe8e8;
+  --tile-border: #000;
 }
 
-/* ============================================================
-   GLOBAL
-   ============================================================ */
+/* --------------------------------------------
+   RESET
+--------------------------------------------- */
 body {
-  background: var(--bg);
-  color: var(--text);
-  font-family: "Inter", Arial, sans-serif;
   margin: 0;
   padding: 0;
-  -webkit-font-smoothing: antialiased;
-}
-
-h1, h2, h3 {
-  margin: 0;
-  font-weight: 800;
-}
-
-p, li {
-  line-height: 1.5;
-}
-
-.text-muted {
-  color: var(--muted);
-}
-
-/* Brutalist card style */
-.card-brutalist {
-  border: 4px solid var(--border);
-  background: var(--tile-bg);
-  padding: 24px;
-  box-shadow:
-    6px 6px 0 var(--accent-2),
-    -6px -6px 0 var(--accent-3);
-}
-
-/* ============================================================
-   BUTTONS
-   ============================================================ */
-.btn {
-  display: inline-block;
-  padding: 10px 16px;
-  border: 3px solid var(--border);
-  font-weight: 700;
-  background: var(--accent-2);
-  color: #fff;
-  text-decoration: none;
-  transition: 0.15s ease-out;
-}
-
-.btn:hover {
-  background: var(--accent-1);
-  transform: translate(-2px, -2px);
-}
-
-/* Less loud button */
-.btn.ghost {
-  background: var(--accent-3);
-}
-
-.btn.raw {
-  background: var(--accent-4);
-}
-
-/* ============================================================
-   PROJECT GRID
-   ============================================================ */
-#projectGrid {
-  display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(240px, 1fr));
-  gap: 16px;
-  margin-top: 20px;
-}
-
-/* Project tile */
-.project-tile {
-  border: 4px solid var(--border);
-  padding: 12px;
-  text-decoration: none;
-  background: var(--tile-bg);
+  font-family: "Inter", sans-serif;
+  background: var(--bg);
   color: var(--text);
-  display: block;
-  transition: background 0.15s, transform 0.15s;
+}
 
-  /* Brutalist stacked shadows */
-  box-shadow:
-    4px 4px 0 var(--accent-1),
-    -4px -4px 0 var(--accent-2);
+/* --------------------------------------------
+   PAGE LAYOUT FIX (THIS FIXES YOUR ISSUE)
+--------------------------------------------- */
+#layout {
+  display: grid;
+  grid-template-columns: 320px 1fr; /* left block + right block */
+  grid-template-rows: auto auto;
+  gap: 24px;
+  padding: 24px;
+  min-height: 100vh;
+}
+
+/* Left: photo + contact */
+#left-column {
+  grid-row: 1 / span 2;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  border: 3px solid var(--color-border);
+  padding: 16px;
+  background: var(--tile-bg);
+}
+
+#profile-pic {
+  width: 100%;
+  border: 3px solid var(--color-border);
+}
+
+.contact-info {
+  margin-top: 12px;
+  font-size: 0.9rem;
+}
+
+/* --------------------------------------------
+   ABOUT BOX
+--------------------------------------------- */
+#about {
+  border: 3px solid var(--color-border);
+  padding: 16px;
+  background: var(--color-accent2);
+  color: white;
+  font-weight: bold;
+}
+
+/* --------------------------------------------
+   PROJECT GRID (RESTORES GRID LAYOUT)
+--------------------------------------------- */
+#projects-wrapper {
+  border: 3px solid var(--color-border);
+  padding: 16px;
+  background: var(--tile-bg);
+}
+
+#project-grid {
+  display: grid;               /* FIX: ensures not stacked */
+  grid-template-columns: repeat(auto-fill, minmax(240px, 1fr));
+  gap: 20px;                   /* Spacing fixed */
+}
+
+/* --------------------------------------------
+   PROJECT TILE
+--------------------------------------------- */
+.project-tile {
+  border: 3px solid var(--tile-border);
+  padding: 12px;
+  background: var(--color-accent3);
+  cursor: pointer;
+  transition: background 0.15s, transform 0.1s;
 }
 
 .project-tile:hover {
-  background: var(--tile-hover);
-  transform: translate(-3px, -3px);
+  background: var(--tile-bg-hover);
+  transform: translateY(-2px);
 }
 
-.project-thumb {
+.project-tile img {
   width: 100%;
-  height: 140px;
-  object-fit: cover;
-  border: 3px solid var(--border);
-  margin-bottom: 10px;
-}
-
-.project-title {
-  font-size: 20px;
-  margin-bottom: 4px;
-}
-
-.project-meta {
-  font-size: 14px;
-  color: var(--muted);
-}
-
-/* ============================================================
-   HOME LAYOUT (Face left, description top right, projects bottom right)
-   ============================================================ */
-.home-layout {
-  display: grid;
-  grid-template-columns: 280px 1fr;
-  gap: 30px;
-  padding: 40px;
-}
-
-.face-card {
-  border: 4px solid var(--border);
-  padding: 16px;
-  background: var(--tile-bg);
-  box-shadow:
-    5px 5px 0 var(--accent-1),
-    -5px -5px 0 var(--accent-4);
-}
-
-.face-img {
-  width: 100%;
-  border: 3px solid var(--border);
-  object-fit: cover;
+  border: 2px solid black;
   margin-bottom: 12px;
 }
 
-@media (max-width: 800px) {
-  .home-layout {
-    grid-template-columns: 1fr;
-  }
+/* --------------------------------------------
+   HEADERS
+--------------------------------------------- */
+h1, h2, h3 {
+  margin: 0;
+  padding: 0;
+  font-weight: 900;
+  letter-spacing: -0.5px;
 }
