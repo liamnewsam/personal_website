@@ -26,17 +26,26 @@ body {
 
 .home-grid {
   display: grid;
-  grid-template-columns: 280px 1fr; /* left narrow, right wide */
-  grid-auto-rows: max-content;      /* Each row height fits its content */
+  grid-template-columns: 280px 1fr;
+  grid-auto-rows: max-content; /* IMPORTANT */
   gap: 2rem;
+  width: 100%;
+  align-items: start;
 }
 
-/* ===== LEFT COLUMN ===== */
 .profile-pic-box {
   grid-column: 1;
   grid-row: 1;
   border-radius: var(--radius);
   box-shadow: var(--shadow);
+}
+.profile-pic {
+  width: 100%;             /* fills the width of its container (.profile-pic-box) */
+  max-width: 280px;        /* prevents it from getting larger than the left column */
+  height: auto;            /* maintains aspect ratio */
+  border-radius: var(--radius); /* rounded corners consistent with theme */
+  display: block;          /* removes inline spacing under the image */
+  object-fit: cover;       /* ensures the image fills the space nicely without distortion */
 }
 
 .contact-box {
@@ -102,6 +111,19 @@ body {
   border-radius: var(--radius);
 }
 
+@media (max-width: 800px) {
+  .home-grid {
+    grid-template-columns: 1fr;
+    grid-template-rows: auto;
+  }
+  .profile-pic-box,
+  .contact-box,
+  .about-box,
+  .projects-box {
+    grid-column: 1;
+    grid-row: auto;
+  }
+}
 
 /* ============================================================
    PROJECT PAGE
