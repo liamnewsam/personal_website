@@ -36,8 +36,6 @@ body {
 .profile-pic-box {
   grid-column: 1;
   grid-row: 1;
-  border-radius: var(--radius);
-  box-shadow: var(--shadow);
 }
 .profile-pic {
   width: 100%;             /* fills the width of its container (.profile-pic-box) */
