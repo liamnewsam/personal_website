@@ -26,6 +26,7 @@ def predict_digit(image_base64):
     exp = np.exp(logits - np.max(logits))
     probs = exp / exp.sum()
     print(probs)
+    print("HII")
 
     return {"probabilities": probs.tolist()}
 
