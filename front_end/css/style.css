@@ -13,15 +13,13 @@
   --shadow: 0px 3px 15px rgba(0, 0, 0, 0.1);
 }
 
-@media (prefers-color-scheme: dark) {
-  :root {
-    --bg-color: #121212;
-    --text-color: #e0e0e0;
-    --accent1: #ff8c00;
-    --accent2: #1e90ff;
-    --accent3: #36aa36;
-    --shadow: 0 2px 6px rgba(0,0,0,0.5);
-  }
+html.dark {
+  --bg-color: #121212;
+  --text-color: #e0e0e0;
+  --accent1: #ff8c00;
+  --accent2: #1e90ff;
+  --accent3: #36aa36;
+  --shadow: 0 2px 6px rgba(0,0,0,0.5);
 }
 
 /* ===== GLOBAL ===== */
@@ -271,15 +269,20 @@ h1, h2 {
   align-items: flex-start;
 }
 
+#demo-left-column,
+#demo-right-column {
+  flex: 1;        /* equal growth */
+  min-width: 0;   /* prevents flex overflow issues */
+}
 /* Canvas styling */
 #canvas-container {
   flex: 0 0 300px;   /* don’t grow, don’t shrink, fixed 300px width */
 }
 
 #canvas {
-  border: 2px solid #000;
   width: 100%;
-  height: auto;
+  height: auto;   /* keep aspect ratio */
+  display: block; /* removes inline-block gap */
   border-radius: var(--radius);
 }
 

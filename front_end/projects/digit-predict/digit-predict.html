@@ -45,22 +45,28 @@
 
           <div id="main-container">
             <!-- LEFT: Canvas -->
-            <div id="canvas-container">
-              <canvas id="canvas" width="800" height="800"></canvas>
+            <div id="demo-left-column">
+              <div id="canvas-container">
+                <div>
+                  <button id="predict">Predict</button>
+                  <button id="erase">Erase</button>
+                </div>
+                <canvas id="canvas"></canvas>
+                
+              </div>
             </div>
 
             <!-- RIGHT: Vertical Bar Chart -->
-            <div id="chart-container">
-              <div id="chart"></div>
+             <div id="demo-right-column">
+              <p id="result"></p>
+              <div id="chart-container">
+                
+                <div id="chart"></div>
+              </div>
             </div>
           </div>
 
-          <div>
-            <button id="predict">Predict</button>
-            <button id="erase">Erase</button>
-          </div>
-
-          <p id="result"></p>
+          
 
         </div>
 
