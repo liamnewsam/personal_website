@@ -1,15 +1,94 @@
-// demo.js — example small interactive component
+const canvas = document.getElementById('canvas');
+const ctx = canvas.getContext('2d');
+let drawing = false;
 
-document.addEventListener("DOMContentLoaded", () => {
-  const btn = document.getElementById("demoBtn");
-  const out = document.getElementById("demoOutput");
+// ------------------ INITIAL BLACK BACKGROUND ------------------
+function resetCanvas() {
+  ctx.fillStyle = "black";
+  ctx.fillRect(0, 0, canvas.width, canvas.height);
+}
+resetCanvas();
 
-  if (!btn || !out) return;
+// ------------------ POSITION HELPERS ------------------
+function getPos(e) {
+  const rect = canvas.getBoundingClientRect();
+  const scaleX = canvas.width / rect.width;
+  const scaleY = canvas.height / rect.height;
 
-  let count = 0;
+  if (e.touches) {
+    return {
+      x: (e.touches[0].clientX - rect.left) * scaleX,
+      y: (e.touches[0].clientY - rect.top) * scaleY
+    };
+  }
 
-  btn.addEventListener("click", () => {
-    count++;
-    out.textContent = `You clicked ${count} time${count === 1 ? "" : "s"}!`;
-  });
+  return {
+    x: e.offsetX * scaleX,
+    y: e.offsetY * scaleY
+  };
+}
+
+// ------------------ DRAWING EVENTS ------------------
+function startDraw(e) {
+  e.preventDefault();
+  drawing = true;
+
+  const { x, y } = getPos(e);
+  ctx.beginPath();
+  ctx.moveTo(x, y);
+}
+
+function moveDraw(e) {
+  if (!drawing) return;
+
+  const { x, y } = getPos(e);
+
+  ctx.lineWidth = 40;
+  ctx.lineCap = "round";
+  ctx.strokeStyle = "white";
+
+  ctx.lineTo(x, y);
+  ctx.stroke();
+}
+
+function endDraw() {
+  drawing = false;
+}
+
+canvas.addEventListener('mousedown', startDraw);
+canvas.addEventListener('mousemove', moveDraw);
+canvas.addEventListener('mouseup', endDraw);
+canvas.addEventListener('mouseleave', endDraw);
+
+canvas.addEventListener('touchstart', startDraw, { passive: false });
+canvas.addEventListener('touchmove', moveDraw, { passive: false });
+canvas.addEventListener('touchend', endDraw);
+canvas.addEventListener('touchcancel', endDraw);
+
+// ------------------ ERASE BUTTON ------------------
+document.getElementById('erase').addEventListener('click', resetCanvas);
+
+// ------------------ PREDICT BUTTON ------------------
+document.getElementById('predict').addEventListener('click', async () => {
+  // Downscale to 280x280 for backend
+  const small = document.createElement('canvas');
+  small.width = 280;
+  small.height = 280;
+  const sctx = small.getContext('2d');
+
+  sctx.drawImage(canvas, 0, 0, 280, 280);
+
+  const dataUrl = small.toDataURL('image/png');
+
+  const response = await fetch(
+    'https://personal-website-40217740204.europe-west1.run.app/digit-predict',
+    {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ image: dataUrl })
+    }
+  );
+
+  const result = await response.json();
+  document.getElementById('result').innerText = `Prediction: ${result.digit}`;
 });
