@@ -26,8 +26,7 @@ body {
 
 .home-grid {
   display: grid;
-  grid-template-columns: 280px 1fr; /* left column fixed, right column flexible */
-  gap: 2rem;
+  grid-template-columns: 280px 500px;
   align-items: start;              /* prevents stretching */
 }
 
@@ -64,8 +63,6 @@ body {
   gap: 2rem;       /* space between about-box and projects-box */
 }
 .about-box {
-  grid-column: 2;
-  grid-row: 1;    /* top right */
   padding: var(--pad);
   background: var(--accent2);
   border-radius: var(--radius);
@@ -74,8 +71,6 @@ body {
 }
 
 .projects-box {
-  grid-column: 2;
-  grid-row: 2;    /* bottom right */
   padding: var(--pad);
   background: var(--accent1);
   border-radius: var(--radius);
@@ -84,14 +79,12 @@ body {
 }
 
 
-
-
 .projects-grid {
   margin-top: 1rem;
-  display: grid;
-  grid-template-columns: repeat(auto-fill, 220px); /* same as tile width */
-  gap: 1rem;
-  justify-content: start; /* aligns tiles to left, instead of stretching */
+  display: flex;
+  flex-wrap: wrap;        /* allows tiles to wrap to next row */
+  gap: 1rem;              /* spacing between tiles */
+  justify-content: flex-start; /* align tiles to the left */
 }
 
 .project-tile {
@@ -103,11 +96,11 @@ body {
   box-shadow: var(--shadow);
   transition: transform 0.15s ease;
 
-  width: 220px;     /* fixed width */
-  height: 300px;    /* fixed height */
+  width: 220px;            /* fixed width */
+  height: 300px;           /* fixed height */
   display: flex;
   flex-direction: column;
-  overflow: hidden; /* prevent overflow from text or images */
+  overflow: hidden;        /* prevent overflow from text or images */
 }
 
 .project-tile:hover {
@@ -116,10 +109,10 @@ body {
 
 .project-tile img {
   width: 100%;
-  height: 150px;       /* fixed image height */
-  object-fit: cover;   /* fills the area without distortion */
+  height: 150px;           /* fixed image height */
+  object-fit: cover;       /* crop if necessary */
   border-radius: var(--radius);
-  flex-shrink: 0;      /* ensures it doesn’t shrink */
+  flex-shrink: 0;
 }
 @media (max-width: 800px) {
   .home-grid {
@@ -135,6 +128,13 @@ body {
   .projects-box {
     grid-column: 1;
     grid-row: auto;
+  }
+  .projects-grid {
+    grid-template-columns: 1fr; /* stack tiles on mobile */
+  }
+  .project-tile {
+    width: 100%;           /* tiles take full width on mobile */
+    height: auto;           /* adjust height to content */
   }
 }
 
