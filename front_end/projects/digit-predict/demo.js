@@ -91,6 +91,7 @@ document.getElementById('predict').addEventListener('click', async () => {
 
   const result = await response.json();
   //document.getElementById('result').innerText = `Prediction: ${result.digit}`;
+  console.log(result)
   const probs = result.probabilities;
 
   drawChart(probs);
