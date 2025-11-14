@@ -3,17 +3,28 @@ const ctx = canvas.getContext('2d');
 let drawing = false;
 
 
+function drawBackground() {
+  ctx.fillStyle = "black";
+  ctx.fillRect(0, 0, canvas.width, canvas.height);
+}
+
 function resizeCanvasForHiDPI() {
   const rect = canvas.getBoundingClientRect();
   const scale = window.devicePixelRatio || 1;
+
+  // Resizing clears the canvas — unavoidable
   canvas.width = rect.width * scale;
   canvas.height = rect.height * scale;
+
+  // Reset scale
   ctx.scale(scale, scale);
+
+  // Redraw the background
+  drawBackground();
 }
 
 resizeCanvasForHiDPI();
 window.addEventListener("resize", resizeCanvasForHiDPI);
-
 // ------------------ INITIAL BLACK BACKGROUND ------------------
 function resetCanvas() {
   ctx.fillStyle = "black";
