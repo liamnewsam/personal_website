@@ -258,3 +258,41 @@ h1, h2 {
 .back-button:hover {
   opacity: 0.7;
 }
+
+#chart-container {
+  width: 300px;
+  height: 200px;
+  margin: 20px auto;
+  border: 1px solid #ccc;
+  padding: 10px;
+}
+
+#chart {
+  display: flex;
+  align-items: flex-end;
+  height: 100%;
+  gap: 4px;
+}
+
+.bar {
+  width: 100%;
+  background-color: steelblue;
+  transition: height 0.3s;
+  position: relative;
+}
+
+.bar-label {
+  position: absolute;
+  bottom: -18px;
+  width: 100%;
+  text-align: center;
+  font-size: 12px;
+}
+
+.bar-value {
+  position: absolute;
+  top: -18px;
+  width: 100%;
+  text-align: center;
+  font-size: 10px;
+}

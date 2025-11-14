@@ -20,9 +20,11 @@ def predict_digit(image_base64):
     arr = np.array(img, dtype=np.float32) / 255.0
     arr = arr.reshape(1, 1, 28, 28)
 
-    # Run ONNX inference
     outputs = session.run(None, {input_name: arr})
-    probs = outputs[0]
+    logits = outputs[0][0]  # (10,)
 
-    pred = int(np.argmax(probs))
-    return {"digit": pred}
+    exp = np.exp(logits - np.max(logits))
+    probs = exp / exp.sum()
+
+    return {"probabilities": probs.tolist()}
+

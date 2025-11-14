@@ -90,5 +90,36 @@ document.getElementById('predict').addEventListener('click', async () => {
   );
 
   const result = await response.json();
-  document.getElementById('result').innerText = `Prediction: ${result.digit}`;
+  //document.getElementById('result').innerText = `Prediction: ${result.digit}`;
+  const probs = result.probabilities;
+
+  drawChart(probs);
 });
+
+
+// ------------------ Draw Function ------------------
+
+function drawChart(probabilities) {
+  const chart = document.getElementById("chart");
+  chart.innerHTML = "";  // Clear previous
+
+  const maxProb = Math.max(...probabilities);
+
+  probabilities.forEach((p, digit) => {
+    const bar = document.createElement("div");
+    bar.className = "bar";
+    bar.style.height = `${(p / maxProb) * 100}%`;
+
+    const label = document.createElement("div");
+    label.className = "bar-label";
+    label.innerText = digit;
+
+    const value = document.createElement("div");
+    value.className = "bar-value";
+    value.innerText = p.toFixed(2);
+
+    bar.appendChild(value);
+    bar.appendChild(label);
+    chart.appendChild(bar);
+  });
+}
