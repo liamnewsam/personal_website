@@ -26,11 +26,9 @@ body {
 
 .home-grid {
   display: grid;
-  grid-template-columns: 280px 1fr;
-  grid-auto-rows: max-content; /* IMPORTANT */
+  grid-template-columns: 280px 1fr; /* left column fixed, right column flexible */
   gap: 2rem;
-  width: 100%;
-  align-items: start;
+  align-items: start;              /* prevents stretching */
 }
 
 .profile-pic-box {
@@ -57,6 +55,12 @@ body {
 .contact-box a {
   color: black;
   font-weight: bold;
+}
+
+.right-column {
+  display: flex;
+  flex-direction: column;
+  gap: 2rem;       /* space between about-box and projects-box */
 }
 .about-box {
   grid-column: 2;
@@ -115,6 +119,9 @@ body {
     grid-template-rows: auto;
   }
   .profile-pic-box,
+  .profile-pic {
+    max-width: 180px; /* smaller column on mobile */
+  }
   .contact-box,
   .about-box,
   .projects-box {
