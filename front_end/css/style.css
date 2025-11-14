@@ -62,17 +62,24 @@ h1, h2 {
 }
 
 .profile-text {
-  position: absolute;       /* overlays the image */
-  bottom: 10px;             /* distance from bottom of image */
-  left: 50%;                /* horizontally center */
+  position: absolute;         /* overlays the image */
+  top: 10px;                  /* distance from top of image */
+  left: 50%;                  /* horizontally center */
   transform: translateX(-50%);
   color: white;
   font-weight: bold;
-  text-shadow: 1px 1px 3px rgba(0,0,0,0.7); /* optional: improves readability */
-  background-color: rgba(0,0,0,0.3);        /* optional: semi-transparent background */
+  text-shadow: 1px 1px 3px rgba(0,0,0,0.7);
+  background-color: rgba(0,0,0,0.3);
   padding: 0.25rem 0.5rem;
   border-radius: var(--radius);
-  font-size: 1rem;          /* adjust size as needed */
+  font-size: 1rem;
+  
+  white-space: nowrap;        /* prevents text from breaking into multiple lines */
+  text-decoration: none;      /* removes underline by default */
+}
+.profile-text:hover {
+  background-color: rgba(0,0,0,0.6);
+  color: #fff;
 }
 
 .contact-box {
