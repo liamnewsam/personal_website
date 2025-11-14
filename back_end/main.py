@@ -9,7 +9,7 @@ CORS(app)
 
 @app.after_request
 def add_cors_headers(response):
-    response.headers['Access-Control-Allow-Origin'] = 'https://personal-website-pi-rosy.vercel.app'
+    response.headers['Access-Control-Allow-Origin'] = 'https://liamcnewsam.com'
     response.headers['Access-Control-Allow-Methods'] = 'POST, OPTIONS'
     response.headers['Access-Control-Allow-Headers'] = 'Content-Type'
     return response
