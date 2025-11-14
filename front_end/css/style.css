@@ -280,7 +280,7 @@ h1, h2 {
 #canvas {
   width: 100%;
   height: auto;   /* keep aspect ratio */
-  display: block; /* removes inline-block gap */
+  aspect-ratio: 1 / 1;
   border-radius: var(--radius);
 }
 
