@@ -1,79 +1,72 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Liam Newsam | Portfolio</title>
-  <link rel="stylesheet" href="style.css" />
-  <script defer src="script.js"></script>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>Liam Newsam — Software & Projects</title>
+
+  <!-- Fonts: replace or add here -->
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;600;800&family=Roboto+Mono:wght@400;700&display=swap" rel="stylesheet">
+
+  <link rel="stylesheet" href="styles.css" />
 </head>
 <body>
-  <header>
-    <nav>
-      <h1 class="logo">Liam Newsam sdf</h1>
-      <ul class="nav-links">
-        <li><a href="#about">About</a></li>
-        <li><a href="#projects">Projects</a></li>
-        <li><a href="#contact">Contact</a></li>
-      </ul>
-    </nav>
-  </header>
+  <main class="page grid-root">
+    <!-- LEFT COLUMN: headshot + contact -->
+    <aside class="left-col card-brutalist">
+      <div class="face-wrap">
+        <!-- Replace src with your face picture -->
+        <img src="images/face.jpg" alt="Liam Newsam face photo" class="face-photo">
+      </div>
 
-  <section id="hero">
-    <div class="hero-content">
-      <img src="profile.jpg" alt="Profile photo of Liam Newsam" class="profile-pic" />
-      <h2>Hi, I’m Liam — a student, developer, and builder.</h2>
-      <p>Welcome to my personal website where I share my projects, interests, and ideas.</p>
-    </div>
-  </section>
+      <div class="contact">
+        <h2 class="name">Liam Newsam</h2>
+        <p class="role">CS Student • Systems & Web</p>
 
-  <section id="about" class="section">
-    <h2>About Me</h2>
-    <p>
-      I’m a UC Berkeley sophomore interested in computer systems, web development, and machine learning.
-      I love building practical tools and experimenting with technology that connects people and data.
-    </p>
-  </section>
+        <ul class="contact-list">
+          <li><strong>Email</strong>: <a href="mailto:liam@example.com">liam@example.com</a></li>
+          <li><strong>GitHub</strong>: <a href="https://github.com/your-username" target="_blank" rel="noopener">github.com/your-username</a></li>
+          <li><strong>Resume</strong>: <a href="/resume.pdf" target="_blank" rel="noopener">PDF</a></li>
+        </ul>
 
-  <section id="projects" class="section">
-    <h2>Projects</h2>
-    <div class="projects-grid">
-      <div class="project-card" onclick="goToProject('project1.html')">
-        <img src="project1-thumb.jpg" alt="Screenshot of project 1" />
-        <div class="project-info">
-          <h3>Clipboard Annotator</h3>
-          <p>A Pygame tool for annotating clipboard text using templates and hotkeys.</p>
+        <div class="left-actions">
+          <a class="btn raw" href="mailto:liam@example.com">Email me</a>
+          <a class="btn raw ghost" href="/contact.html">Contact</a>
         </div>
       </div>
-      <div class="project-card" onclick="goToProject('project2.html')">
-        <img src="project2-thumb.jpg" alt="Screenshot of project 2" />
-        <div class="project-info">
-          <h3>Housing Study System</h3>
-          <p>Automated Craigslist outreach and personalized participant dashboards.</p>
-        </div>
-      </div>
-      <div class="project-card" onclick="goToProject('project3.html')">
-        <img src="project3-thumb.jpg" alt="Screenshot of project 3" />
-        <div class="project-info">
-          <h3>Image Segmentation Grid</h3>
-          <p>Visualization tool that zooms in on masked regions within image datasets.</p>
-        </div>
-      </div>
-    </div>
-  </section>
+    </aside>
 
-  <section id="contact" class="section">
-    <h2>Contact</h2>
-    <p>Feel free to reach out if you’d like to connect or collaborate!</p>
-    <ul class="contact-list">
-      <li>Email: <a href="mailto:liam.news@example.com">liam.news@example.com</a></li>
-      <li>GitHub: <a href="https://github.com/liamnewsam" target="_blank">github.com/liamnewsam</a></li>
-      <li>LinkedIn: <a href="https://linkedin.com/in/liamnewsam" target="_blank">linkedin.com/in/liamnewsam</a></li>
-    </ul>
-  </section>
+    <!-- RIGHT COLUMN -->
+    <section class="right-col">
+      <!-- TOP RIGHT: About / description -->
+      <header class="bio card-brutalist">
+        <h1 class="bio-title">About</h1>
+        <p class="bio-text">
+          I’m a second-year computer science student interested in building practical, well-tested systems and intuitive front-end tools. I focus on clean abstractions, reproducible experiments, and readable code.
+        </p>
 
-  <footer>
-    <p>© 2025 Liam Newsam. All rights reserved.</p>
-  </footer>
+        <ul class="skills-list">
+          <li>Languages: C, Python, JavaScript</li>
+          <li>Interests: OS / concurrency, web systems, tooling</li>
+          <li>Open to internships & side projects</li>
+        </ul>
+      </header>
+
+      <!-- BOTTOM RIGHT: Projects -->
+      <section class="projects card-brutalist">
+        <h2 class="projects-title">Selected Projects</h2>
+
+        <!-- grid of tiles -->
+        <div id="projectGrid" class="project-grid" aria-live="polite">
+          <!-- Tiles inserted by script.js -->
+        </div>
+
+        <p class="projects-note">Click a tile to open the project.</p>
+      </section>
+    </section>
+  </main>
+
+  <script src="script.js"></script>
 </body>
 </html>
