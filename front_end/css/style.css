@@ -1,0 +1,193 @@
+/* ============================================================
+   GLOBAL THEME VARIABLES — Used site-wide
+============================================================ */
+:root {
+  /* Colors: colorful minimalist */
+  --color-bg: #faf7f5;
+  --color-text: #222;
+
+  --color-accent1: #ff595e;
+  --color-accent2: #1982c4;
+  --color-accent3: #8ac926;
+  --color-accent4: #ffca3a;
+
+  --color-card-bg: white;
+
+  /* Typography */
+  --font-main: "Inter", Arial, sans-serif;
+
+  /* Spacing + layout */
+  --page-padding: 2rem;
+  --card-radius: 12px;
+  --card-border: 3px;
+
+  /* Widths */
+  --max-read-width: 75ch;
+  --max-content-width: 1000px;
+}
+
+/* ============================================================
+   GLOBAL RESETS
+============================================================ */
+* {
+  box-sizing: border-box;
+}
+
+body {
+  margin: 0;
+  padding: var(--page-padding);
+  background: var(--color-bg);
+  color: var(--color-text);
+  font-family: var(--font-main);
+}
+
+/* Limit text width for readability */
+p, h1, h2, h3 {
+  max-width: var(--max-read-width);
+}
+
+/* Links */
+a {
+  color: var(--color-accent1);
+  font-weight: bold;
+  text-decoration: none;
+}
+a:hover {
+  opacity: 0.75;
+}
+
+/* ============================================================
+   REUSABLE COMPONENTS — Used by all pages
+============================================================ */
+
+/* Card */
+.card {
+  background: var(--card-bg);
+  border: var(--card-border) solid var(--color-accent3);
+  border-radius: var(--card-radius);
+  padding: 1rem;
+}
+
+/* Section wrapper */
+.section {
+  margin-bottom: 2.5rem;
+}
+
+/* Grid layouts */
+.grid-2 {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 2rem;
+}
+
+.grid-3 {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 1.2rem;
+}
+
+/* Images */
+.responsive-img {
+  width: 100%;
+  height: auto;
+  border-radius: var(--card-radius);
+}
+
+/* Code blocks */
+.code-box {
+  background: #f2f2f2;
+  padding: 1rem;
+  border-radius: 8px;
+  font-family: monospace;
+  overflow-x: auto;
+}
+
+/* ============================================================
+   HOMEPAGE LAYOUT
+============================================================ */
+
+.home-container {
+  display: grid;
+  grid-template-columns: 280px 1fr;
+  grid-template-rows: auto auto;
+  gap: 2rem;
+}
+
+/* Left column (image + contact) */
+.home-left {
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem;
+}
+
+/* Right column top: about me */
+.home-about {
+  border-left: 8px solid var(--color-accent2);
+  padding-left: 1rem;
+}
+
+/* Projects grid on home */
+.home-projects {
+  margin-top: 1rem;
+}
+
+.project-tile {
+  cursor: pointer;
+  transition: transform 0.1s ease;
+  border-color: var(--color-accent4);
+}
+.project-tile:hover {
+  transform: scale(1.02);
+}
+
+/* ============================================================
+   PROJECT PAGE LAYOUT
+============================================================ */
+
+.project-container {
+  max-width: var(--max-content-width);
+  margin: 0 auto;
+  display: flex;
+  flex-direction: column;
+  gap: 2rem;
+}
+
+.project-header {
+  border-left: 8px solid var(--color-accent2);
+  padding-left: 1rem;
+}
+
+.project-header h1 {
+  margin: 0;
+  font-size: 2.5rem;
+}
+
+.project-meta {
+  font-weight: bold;
+  color: var(--color-accent2);
+}
+
+.project-content {
+  padding: 1.5rem;
+  background: var(--card-bg);
+  border-radius: var(--card-radius);
+  border: var(--card-border) solid var(--color-accent3);
+  line-height: 1.6;
+}
+
+.project-footer {
+  margin-top: 2rem;
+}
+
+/* ============================================================
+   RESPONSIVE ADJUSTMENTS
+============================================================ */
+@media (max-width: 768px) {
+  .home-container {
+    grid-template-columns: 1fr;
+  }
+
+  .grid-2, .grid-3 {
+    grid-template-columns: 1fr;
+  }
+}

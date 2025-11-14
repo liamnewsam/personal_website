@@ -1,69 +1,53 @@
-<!doctype html>
+<!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="utf-8" />
-  <meta name="viewport" content="width=device-width,initial-scale=1" />
-  <title>Your Name — Portfolio</title>
-
-  <!-- Fonts -->
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;600;800&family=Roboto+Mono:wght@400;700&display=swap" rel="stylesheet">
-
-  <link rel="stylesheet" href="styles.css">
+  <meta charset="UTF-8">
+  <title>Liam Newsam – Portfolio</title>
+  <link rel="stylesheet" href="/css/style.css">
 </head>
+
 <body>
-  <div class="site">
-    <!-- Left column: face + contact -->
-    <aside class="col left-col card">
-      <div class="face-outer">
-        <!-- Replace with your face image -->
-        <img class="face" src="images/face.jpg" alt="Your face photo">
+
+  <div class="home-container">
+
+    <!-- LEFT SIDE -->
+    <div class="home-left">
+      <img src="/images/me.jpg" alt="My face" class="responsive-img">
+
+      <div class="card">
+        <h2>Contact</h2>
+        <p>Email: you@email.com</p>
+        <p>GitHub: github.com/yourname</p>
+        <p>LinkedIn: linkedin.com/in/yourname</p>
+      </div>
+    </div>
+
+    <!-- ABOUT ME -->
+    <div class="home-about">
+      <h1>Hi, I'm Liam.</h1>
+      <p>
+        I'm a CS student specializing in software engineering, systems, and tooling.
+        This site showcases my favorite projects, demos, and work.
+      </p>
+    </div>
+
+    <!-- PROJECTS -->
+    <div class="home-projects">
+      <h2>Projects</h2>
+
+      <div class="grid-3">
+        <a href="/projects/example-project.html" class="card project-tile">
+          <img src="/images/project-thumb.jpg" class="responsive-img">
+          <h3>Example Project</h3>
+          <p>A short description of what it does.</p>
+        </a>
       </div>
 
-      <div class="contact">
-        <h1 class="name">Your Name</h1>
-        <p class="role">CS Student — Systems & Web</p>
+    </div>
 
-        <ul class="contact-list">
-          <li><strong>Email</strong>: <a href="mailto:you@example.com">you@example.com</a></li>
-          <li><strong>GitHub</strong>: <a href="https://github.com/your-username" target="_blank" rel="noopener">github.com/your-username</a></li>
-          <li><strong>Resume</strong>: <a href="/resume.pdf" target="_blank" rel="noopener">PDF</a></li>
-        </ul>
-
-        <div class="actions">
-          <a class="btn primary" href="mailto:you@example.com">Email</a>
-          <a class="btn ghost" href="/contact.html">Contact</a>
-        </div>
-      </div>
-    </aside>
-
-    <!-- Right column: bio + projects -->
-    <main class="col right-col">
-      <section class="card bio-card">
-        <h2 class="bio-title">About</h2>
-        <p class="bio-text">
-          I'm a computer science student building systems and web tools. I favour clarity, small abstractions, and readable code. Open to internships and interesting problems.
-        </p>
-
-        <ul class="skill-list">
-          <li>Languages: C, Python, JavaScript</li>
-          <li>Interests: Operating Systems, Tooling, Front-end UX</li>
-          <li>Looking for: internships & open-source collabs</li>
-        </ul>
-      </section>
-
-      <section class="card projects-card">
-        <div class="projects-header">
-          <h3>Selected Projects</h3>
-          <p class="projects-sub">Click a tile to open the project page.</p>
-        </div>
-
-        <!-- grid gets rendered by script.js -->
-        <div id="projectGrid" class="project-grid" role="list" aria-label="projects"></div>
-      </section>
-    </main>
   </div>
 
-  <script src="script.js" defer></script>
+  <!-- Include JS -->
+  <script type="module" src="/js/script.js"></script>
 </body>
 </html>
