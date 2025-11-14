@@ -272,13 +272,14 @@ h1, h2 {
 
 /* Canvas styling */
 #canvas-container {
-  flex: 1;
+  flex: 0 0 300px;   /* don’t grow, don’t shrink, fixed 300px width */
 }
 
 #canvas {
   border: 2px solid #000;
-  width: 50%;
+  width: 100%;
   height: auto;
+  border-radius: var(--radius);
 }
 
 /* Bar chart container (fixed width on the side) */
