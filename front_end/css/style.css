@@ -103,96 +103,6 @@ a:hover {
 }
 
 /* ============================================================
-   HOMEPAGE LAYOUT
-============================================================ */
-
-.home-container {
-  display: grid;
-  grid-template-columns: 280px 1fr;
-  grid-template-rows: auto auto;
-  gap: 2rem;
-}
-
-/* Left column (image + contact) */
-.home-left {
-  display: flex;
-  flex-direction: column;
-  gap: 1.5rem;
-}
-
-/* Right column top: about me */
-.home-about {
-  border-left: 8px solid var(--color-accent2);
-  padding-left: 1rem;
-}
-
-/* Projects grid on home */
-.home-projects {
-  margin-top: 1rem;
-}
-
-.project-tile {
-  cursor: pointer;
-  transition: transform 0.1s ease;
-  border-color: var(--color-accent4);
-}
-.project-tile:hover {
-  transform: scale(1.02);
-}
-
-/* ============================================================
-   PROJECT PAGE LAYOUT
-============================================================ */
-
-.project-container {
-  max-width: var(--max-content-width);
-  margin: 0 auto;
-  display: flex;
-  flex-direction: column;
-  gap: 2rem;
-}
-
-.project-header {
-  border-left: 8px solid var(--color-accent2);
-  padding-left: 1rem;
-}
-
-.project-header h1 {
-  margin: 0;
-  font-size: 2.5rem;
-}
-
-.project-meta {
-  font-weight: bold;
-  color: var(--color-accent2);
-}
-
-.project-content {
-  padding: 1.5rem;
-  background: var(--card-bg);
-  border-radius: var(--card-radius);
-  border: var(--card-border) solid var(--color-accent3);
-  line-height: 1.6;
-}
-
-.project-footer {
-  margin-top: 2rem;
-}
-
-/* ============================================================
-   RESPONSIVE ADJUSTMENTS
-============================================================ */
-@media (max-width: 768px) {
-  .home-container {
-    grid-template-columns: 1fr;
-  }
-
-  .grid-2, .grid-3 {
-    grid-template-columns: 1fr;
-  }
-}
-
-/* ============================================================
    HOMEPAGE GRID LAYOUT — FIXED AS REQUESTED
 ============================================================ */
 
@@ -277,3 +187,57 @@ Home layout:
     grid-template-columns: 1fr;
   }
 }
+
+
+/* ============================================================
+   PROJECT PAGE LAYOUT
+============================================================ */
+
+.project-container {
+  max-width: var(--max-content-width);
+  margin: 0 auto;
+  display: flex;
+  flex-direction: column;
+  gap: 2rem;
+}
+
+.project-header {
+  border-left: 8px solid var(--color-accent2);
+  padding-left: 1rem;
+}
+
+.project-header h1 {
+  margin: 0;
+  font-size: 2.5rem;
+}
+
+.project-meta {
+  font-weight: bold;
+  color: var(--color-accent2);
+}
+
+.project-content {
+  padding: 1.5rem;
+  background: var(--card-bg);
+  border-radius: var(--card-radius);
+  border: var(--card-border) solid var(--color-accent3);
+  line-height: 1.6;
+}
+
+.project-footer {
+  margin-top: 2rem;
+}
+
+/* ============================================================
+   RESPONSIVE ADJUSTMENTS
+============================================================ */
+@media (max-width: 768px) {
+  .home-container {
+    grid-template-columns: 1fr;
+  }
+
+  .grid-2, .grid-3 {
+    grid-template-columns: 1fr;
+  }
+}
+
