@@ -31,10 +31,13 @@ body {
   align-items: start;              /* prevents stretching */
 }
 
-.profile-pic-box {
-  grid-column: 1;
-  grid-row: 1;
+.left-column {
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem;
 }
+
+
 .profile-pic {
   width: 100%;             /* fills the width of its container (.profile-pic-box) */
   max-width: 280px;        /* prevents it from getting larger than the left column */
@@ -45,7 +48,6 @@ body {
 }
 
 .contact-box {
-  grid-column: 1;
   grid-row: 2;    /* under the picture */
   padding: var(--pad);
   background: var(--accent3);
