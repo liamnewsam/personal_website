@@ -25,42 +25,35 @@ body {
 }
 
 .home-grid {
-  max-width: var(--content-max);
-  width: 100%;
   display: grid;
-  grid-template-columns: 280px 1fr;
-  grid-template-rows: auto auto;
+  grid-template-columns: 280px 1fr; /* left narrow, right wide */
+  grid-auto-rows: max-content;      /* Each row height fits its content */
   gap: 2rem;
 }
 
 /* ===== LEFT COLUMN ===== */
-.left-col {
-  display: flex;
-  flex-direction: column;
-  gap: 1.5rem;
-}
-
-.profile-pic {
-  width: 100%;
+.profile-pic-box {
+  grid-column: 1;
+  grid-row: 1;
   border-radius: var(--radius);
   box-shadow: var(--shadow);
 }
 
-/* ===== CONTACT ===== */
 .contact-box {
+  grid-column: 1;
+  grid-row: 2;    /* under the picture */
   padding: var(--pad);
   background: var(--accent3);
   border-radius: var(--radius);
   box-shadow: var(--shadow);
 }
-
 .contact-box a {
   color: black;
   font-weight: bold;
 }
-
-/* ===== ABOUT ===== */
 .about-box {
+  grid-column: 2;
+  grid-row: 1;    /* top right */
   padding: var(--pad);
   background: var(--accent2);
   border-radius: var(--radius);
@@ -68,15 +61,18 @@ body {
   box-shadow: var(--shadow);
 }
 
-/* ===== PROJECTS ===== */
-.project-area {
+.projects-box {
   grid-column: 2;
+  grid-row: 2;    /* bottom right */
   padding: var(--pad);
   background: var(--accent1);
   border-radius: var(--radius);
   box-shadow: var(--shadow);
   color: white;
 }
+
+
+
 
 .projects-grid {
   margin-top: 1rem;
