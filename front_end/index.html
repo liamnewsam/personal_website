@@ -1,55 +1,58 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <title>Liam Newsam – Portfolio</title>
-  <link rel="stylesheet" href="/css/style.css">
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Liam Newsam — Portfolio</title>
+  <link rel="stylesheet" href="style.css" />
 </head>
-
 <body>
 
-  <!-- Two-column grid -->
   <div class="home-grid">
 
     <!-- LEFT COLUMN -->
-    <div class="left-column">
-      <img src="/images/me.jpg" alt="My face" class="responsive-img">
+    <div class="left-col">
+      <img src="assets/me.jpg" alt="Profile Image" class="profile-pic" />
 
-      <div class="card contact-card">
+      <div class="contact-box">
         <h2>Contact</h2>
-        <p>Email: you@email.com</p>
-        <p>GitHub: github.com/yourname</p>
-        <p>LinkedIn: linkedin.com/in/yourname</p>
+        <p>Email: you@example.com</p>
+        <p>GitHub: <a href="#">github.com/you</a></p>
+        <p>LinkedIn: <a href="#">linkedin.com/in/you</a></p>
       </div>
     </div>
 
-    <!-- RIGHT COLUMN -->
-    <div class="right-column">
-
-      <section class="home-about">
-        <h1>Hi, I'm Liam.</h1>
-        <p>
-          I'm a CS student specializing in software engineering, systems, and tooling.
-          This site showcases my favorite projects, demos, and work.
-        </p>
-      </section>
-
-      <section class="home-projects">
-        <h2>Projects</h2>
-
-        <div class="projects-grid">
-          <a href="/projects/example-project.html" class="card project-tile">
-            <img src="/images/project-thumb.jpg" class="responsive-img">
-            <h3>Example Project</h3>
-            <p>A short description of what it does.</p>
-          </a>
-        </div>
-      </section>
-
+    <!-- TOP RIGHT: ABOUT -->
+    <div class="about-box">
+      <h1>Hi, I'm Liam</h1>
+      <p>
+        I'm a CS student at UC Berkeley specializing in systems, ML, and full-stack
+        development. I love building clean, beautiful software and visual tools.
+        Welcome to my portfolio!
+      </p>
     </div>
 
+    <!-- BOTTOM RIGHT: PROJECT TILES -->
+    <div class="project-area">
+      <h2>Projects</h2>
+
+      <div class="projects-grid">
+        <a href="projects/demo1/index.html" class="project-tile">
+          <img src="assets/demo1.png" />
+          <h3>Demo Project 1</h3>
+          <p>A short description of the project.</p>
+        </a>
+
+        <a href="projects/demo2/index.html" class="project-tile">
+          <img src="assets/demo2.png" />
+          <h3>Demo Project 2</h3>
+          <p>Another project description.</p>
+        </a>
+      </div>
+
+    </div>
   </div>
 
-  <script type="module" src="/js/script.js"></script>
+  <script src="/js/script.js"></script>
 </body>
 </html>

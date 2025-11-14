@@ -1,243 +1,182 @@
-/* ============================================================
-   GLOBAL THEME VARIABLES — Used site-wide
-============================================================ */
+/* ===== VARIABLES ===== */
 :root {
-  /* Colors: colorful minimalist */
-  --color-bg: #faf7f5;
-  --color-text: #222;
+  --bg-color: #fdfdfd;
+  --text-color: #1e1e1e;
+  --accent1: #ff6b6b;
+  --accent2: #5f6cff;
+  --accent3: #ffa552;
 
-  --color-accent1: #ff595e;
-  --color-accent2: #1982c4;
-  --color-accent3: #8ac926;
-  --color-accent4: #ffca3a;
+  --content-max: 1200px;
 
-  --color-card-bg: white;
-
-  /* Typography */
-  --font-main: "Inter", Arial, sans-serif;
-
-  /* Spacing + layout */
-  --page-padding: 2rem;
-  --card-radius: 12px;
-  --card-border: 3px;
-
-  /* Widths */
-  --max-read-width: 75ch;
-  --max-content-width: 1000px;
+  --pad: 1rem;
+  --radius: 14px;
+  --shadow: 0px 3px 15px rgba(0, 0, 0, 0.1);
 }
 
-/* ============================================================
-   GLOBAL RESETS
-============================================================ */
-* {
-  box-sizing: border-box;
-}
-
+/* ===== GLOBAL ===== */
 body {
   margin: 0;
-  padding: var(--page-padding);
-  background: var(--color-bg);
-  color: var(--color-text);
-  font-family: var(--font-main);
+  padding: 2rem;
+  font-family: "Inter", sans-serif;
+  background: var(--bg-color);
+  color: var(--text-color);
+  display: flex;
+  justify-content: center;
 }
-
-/* Limit text width for readability */
-p, h1, h2, h3 {
-  max-width: var(--max-read-width);
-}
-
-/* Links */
-a {
-  color: var(--color-accent1);
-  font-weight: bold;
-  text-decoration: none;
-}
-a:hover {
-  opacity: 0.75;
-}
-
-/* ============================================================
-   REUSABLE COMPONENTS — Used by all pages
-============================================================ */
-
-/* Card */
-.card {
-  background: var(--card-bg);
-  border: var(--card-border) solid var(--color-accent3);
-  border-radius: var(--card-radius);
-  padding: 1rem;
-}
-
-/* Section wrapper */
-.section {
-  margin-bottom: 2.5rem;
-}
-
-/* Grid layouts */
-.grid-2 {
-  display: grid;
-  grid-template-columns: 1fr 1fr;
-  gap: 2rem;
-}
-
-.grid-3 {
-  display: grid;
-  grid-template-columns: repeat(3, 1fr);
-  gap: 1.2rem;
-}
-
-/* Images */
-.responsive-img {
-  width: 100%;
-  height: auto;
-  border-radius: var(--card-radius);
-}
-
-/* Code blocks */
-.code-box {
-  background: #f2f2f2;
-  padding: 1rem;
-  border-radius: 8px;
-  font-family: monospace;
-  overflow-x: auto;
-}
-
-/* ============================================================
-   HOMEPAGE GRID LAYOUT — FIXED AS REQUESTED
-============================================================ */
-
-/*
-Home layout:
-----------------------------------------
-| [PHOTO + CONTACT] | [   ABOUT ME   ] |
-|                   | [   PROJECTS   ] |
-----------------------------------------
-*/
 
 .home-grid {
+  max-width: var(--content-max);
+  width: 100%;
   display: grid;
   grid-template-columns: 280px 1fr;
-  grid-template-rows: auto 1fr;
+  grid-template-rows: auto auto;
   gap: 2rem;
 }
 
-/* LEFT COLUMN */
-.left-column {
-  grid-column: 1;
-  grid-row: 1 / span 2; /* spans both top and bottom rows */
+/* ===== LEFT COLUMN ===== */
+.left-col {
   display: flex;
   flex-direction: column;
   gap: 1.5rem;
 }
 
-/* RIGHT COLUMN */
-.right-column {
+.profile-pic {
+  width: 100%;
+  border-radius: var(--radius);
+  box-shadow: var(--shadow);
+}
+
+/* ===== CONTACT ===== */
+.contact-box {
+  padding: var(--pad);
+  background: var(--accent3);
+  border-radius: var(--radius);
+  box-shadow: var(--shadow);
+}
+
+.contact-box a {
+  color: black;
+  font-weight: bold;
+}
+
+/* ===== ABOUT ===== */
+.about-box {
+  padding: var(--pad);
+  background: var(--accent2);
+  border-radius: var(--radius);
+  color: white;
+  box-shadow: var(--shadow);
+}
+
+/* ===== PROJECTS ===== */
+.project-area {
   grid-column: 2;
-  grid-row: 1 / span 2;
-  display: flex;
-  flex-direction: column;
-  gap: 2rem;
-}
-
-/* About Me section */
-.home-about {
-  border-left: 8px solid var(--color-accent2);
-  padding-left: 1rem;
-}
-
-/* Projects section */
-.home-projects {
-  margin-top: 0.5rem;
+  padding: var(--pad);
+  background: var(--accent1);
+  border-radius: var(--radius);
+  box-shadow: var(--shadow);
+  color: white;
 }
 
 .projects-grid {
+  margin-top: 1rem;
   display: grid;
-  grid-template-columns: repeat(3, 1fr);
+  grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
   gap: 1rem;
 }
 
-/* Fix tile styling */
 .project-tile {
-  cursor: pointer;
-  border-color: var(--color-accent4);
-  transition: transform 0.1s ease;
+  background: white;
+  border-radius: var(--radius);
+  padding: 0.75rem;
+  color: black;
+  text-decoration: none;
+  box-shadow: var(--shadow);
+  transition: transform 0.15s ease;
 }
+
 .project-tile:hover {
-  transform: scale(1.02);
+  transform: scale(1.03);
 }
 
-/* Responsive */
-@media (max-width: 800px) {
-  .home-grid {
-    grid-template-columns: 1fr;
-    grid-template-rows: auto auto auto;
-  }
-
-  .left-column {
-    grid-row: auto;
-    grid-column: 1;
-  }
-
-  .right-column {
-    grid-row: auto;
-    grid-column: 1;
-  }
-
-  .projects-grid {
-    grid-template-columns: 1fr;
-  }
+.project-tile img {
+  width: 100%;
+  height: 100px;
+  object-fit: cover;
+  border-radius: var(--radius);
 }
 
 
 /* ============================================================
-   PROJECT PAGE LAYOUT
-============================================================ */
+   PROJECT PAGE
+   ============================================================ */
 
-.project-container {
-  max-width: var(--max-content-width);
+.project-page {
+  max-width: var(--content-max);
   margin: 0 auto;
+  padding: 2rem;
   display: flex;
   flex-direction: column;
   gap: 2rem;
 }
 
-.project-header {
-  border-left: 8px solid var(--color-accent2);
-  padding-left: 1rem;
+/* Banner image */
+.project-banner img {
+  width: 100%;
+  height: 250px;
+  object-fit: cover;
+  border-radius: var(--radius);
+  box-shadow: var(--shadow);
 }
 
-.project-header h1 {
-  margin: 0;
-  font-size: 2.5rem;
+.project-title {
+  font-size: 2.3rem;
+  font-weight: 700;
+  color: var(--text-color);
 }
 
-.project-meta {
-  font-weight: bold;
-  color: var(--color-accent2);
+.project-subtitle {
+  font-size: 1.2rem;
+  opacity: 0.85;
 }
 
+/* Sections */
 .project-content {
+  display: flex;
+  flex-direction: column;
+  gap: 2rem;
+}
+
+.project-section {
   padding: 1.5rem;
-  background: var(--card-bg);
-  border-radius: var(--card-radius);
-  border: var(--card-border) solid var(--color-accent3);
-  line-height: 1.6;
+  border-radius: var(--radius);
+  background: white;
+  box-shadow: var(--shadow);
 }
 
-.project-footer {
-  margin-top: 2rem;
+.project-section h2 {
+  margin-top: 0;
+  color: var(--accent2);
 }
 
-/* ============================================================
-   RESPONSIVE ADJUSTMENTS
-============================================================ */
-@media (max-width: 768px) {
-  .home-container {
-    grid-template-columns: 1fr;
-  }
-
-  .grid-2, .grid-3 {
-    grid-template-columns: 1fr;
-  }
+/* Demo box */
+.demo-box {
+  padding: 2rem;
+  border-radius: var(--radius);
+  background: var(--accent3);
+  box-shadow: var(--shadow);
 }
 
+/* Back button */
+.back-button {
+  margin-top: 1rem;
+  text-decoration: none;
+  font-weight: bold;
+  font-size: 1.1rem;
+  color: var(--accent1);
+  transition: opacity 0.2s ease;
+}
+
+.back-button:hover {
+  opacity: 0.7;
+}
