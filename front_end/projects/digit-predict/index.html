@@ -1,94 +1,40 @@
-<!doctype html>
+<!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="utf-8">
-  <meta name="viewport" content="width=device-width,initial-scale=1">
-
-  <title>Project Name — Portfolio</title>
-
-  <!-- Reuse global fonts + global styles -->
-  <link href="/styles.css" rel="stylesheet">
-
-  <!-- Optional project-specific stylesheet -->
-  <link href="project.css" rel="stylesheet">
+  <meta charset="UTF-8">
+  <title>Project Title – Liam Newsam</title>
+  <link rel="stylesheet" href="../css/project.css">
 </head>
+
 <body>
-  <header class="proj-header">
-    <a class="proj-back" href="/">← Back</a>
+  <div class="project-container">
 
-    <h1 class="proj-title">Project Name</h1>
-    <p class="proj-subtitle">Short tagline — 1-sentence description of what this does.</p>
-  </header>
+    <header class="project-header">
+      <h1>Project Title</h1>
+      <div class="project-meta">Category – Technologies Used</div>
+    </header>
 
-  <!-- Hero section -->
-  <section class="proj-hero card">
-    <img class="proj-hero-img" src="hero.png" alt="Hero image">
-  </section>
+    <section class="project-content">
+      <h2>Overview</h2>
+      <p>
+        This is where your project description goes. Describe what it does, why you built it,
+        and any interesting technical challenges.
+      </p>
 
-  <!-- Overview -->
-  <section class="proj-section card">
-    <h2 class="proj-section-title">Summary</h2>
-    <p class="proj-text">
-      This is a brief explanation of your project: what it does, who it's for,
-      why you built it, and anything interesting or unique.
-      Keep it short — 3–6 sentences.
-    </p>
-  </section>
+      <h2>Demo / Code Sample</h2>
+      <div class="code-box">
+<pre>
+function example() {
+  console.log("Hello World");
+}
+</pre>
+      </div>
+    </section>
 
-  <!-- Features -->
-  <section class="proj-section card">
-    <h2 class="proj-section-title">Features</h2>
-    <ul class="proj-list">
-      <li>Feature 1 — very short description.</li>
-      <li>Feature 2 — very short description.</li>
-      <li>Feature 3 — very short description.</li>
-    </ul>
-  </section>
+    <footer class="project-footer">
+      <a href="../index.html">← Back to Home</a>
+    </footer>
 
-  <!-- Tech stack -->
-  <section class="proj-section card">
-    <h2 class="proj-section-title">Tech Stack</h2>
-    <ul class="proj-list">
-      <li>Language(s): JavaScript, Python, etc.</li>
-      <li>Frameworks: Flask, React, etc.</li>
-      <li>Tools: Docker, Webpack, etc.</li>
-    </ul>
-  </section>
-
-  <!-- Demo -->
-  <section class="proj-section card">
-    <h2 class="proj-section-title">Demo</h2>
-    <p class="proj-text">Try the interactive demo below:</p>
-
-    <div id="demo-root" class="proj-demo">
-      <!-- JS injects demo here -->
-      <button id="demoBtn" class="btn primary">Click me</button>
-      <p id="demoOutput" class="proj-text muted"></p>
-    </div>
-  </section>
-
-  <!-- Links -->
-  <section class="proj-section card">
-    <h2 class="proj-section-title">Links</h2>
-    <ul class="proj-list">
-      <li>
-        Repo:
-        <a target="_blank" rel="noopener" href="https://github.com/your-user/project-name">
-          github.com/your-user/project-name
-        </a>
-      </li>
-      <li>
-        Live Demo:
-        <a target="_blank" rel="noopener" href="https://yourdemo.com">yourdemo.com</a>
-      </li>
-      <li>
-        Video Walkthrough:
-        <a target="_blank" rel="noopener" href="https://youtube.com/...">YouTube link</a>
-      </li>
-    </ul>
-  </section>
-
-  <!-- Optional project-specific JS -->
-  <script src="demo.js"></script>
+  </div>
 </body>
 </html>
