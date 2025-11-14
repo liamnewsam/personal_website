@@ -21,7 +21,7 @@ def predict_digit(image_base64):
     arr = arr.reshape(1, 1, 28, 28)
 
     outputs = session.run(None, {input_name: arr})
-    logits = outputs[0]
+    logits = outputs[0][0]
     print(logits)
     exp = np.exp(logits - np.max(logits))
     probs = exp / exp.sum()
