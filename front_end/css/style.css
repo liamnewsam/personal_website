@@ -259,40 +259,65 @@ h1, h2 {
   opacity: 0.7;
 }
 
+/* ============================================================
+   PROJECT: DIGIT PREDICT
+   ============================================================ */
+
+/* Layout: canvas left, bar chart right */
+#main-container {
+  display: flex;
+  gap: 20px;
+  align-items: flex-start;
+}
+
+/* Canvas styling */
+#canvas-container {
+  flex: 1;
+}
+
+#canvas {
+  border: 2px solid #000;
+  width: 100%;
+  height: auto;
+}
+
+/* Bar chart container (fixed width on the side) */
 #chart-container {
-  width: 300px;
-  height: 200px;
-  margin: 20px auto;
+  width: 150px;
   border: 1px solid #ccc;
   padding: 10px;
 }
 
+/* Vertical stacked chart */
 #chart {
   display: flex;
-  align-items: flex-end;
-  height: 100%;
-  gap: 4px;
+  flex-direction: column;
+  justify-content: flex-start;
+  gap: 8px;
 }
 
+/* Each bar row */
 .bar {
-  width: 100%;
+  height: 20px;
   background-color: steelblue;
-  transition: height 0.3s;
   position: relative;
+  transition: width 0.3s;
 }
 
+/* Label on the left */
 .bar-label {
   position: absolute;
-  bottom: -18px;
-  width: 100%;
-  text-align: center;
+  left: -25px;
+  top: 0;
+  width: 20px;
+  text-align: right;
   font-size: 12px;
 }
 
+/* Value text on the right end of bar */
 .bar-value {
   position: absolute;
-  top: -18px;
-  width: 100%;
-  text-align: center;
-  font-size: 10px;
+  right: -35px;
+  top: 0;
+  font-size: 12px;
 }
