@@ -47,13 +47,32 @@ h1, h2 {
 }
 
 
+.profile-pic-box {
+  position: relative;       /* establishes positioning context */
+  width: 100%;
+  max-width: 280px;
+}
+
 .profile-pic {
-  width: 100%;             /* fills the width of its container (.profile-pic-box) */
-  max-width: 280px;        /* prevents it from getting larger than the left column */
-  height: auto;            /* maintains aspect ratio */
-  border-radius: var(--radius); /* rounded corners consistent with theme */
-  display: block;          /* removes inline spacing under the image */
-  object-fit: cover;       /* ensures the image fills the space nicely without distortion */
+  width: 100%;
+  height: auto;
+  border-radius: var(--radius);
+  display: block;
+  object-fit: cover;
+}
+
+.profile-text {
+  position: absolute;       /* overlays the image */
+  bottom: 10px;             /* distance from bottom of image */
+  left: 50%;                /* horizontally center */
+  transform: translateX(-50%);
+  color: white;
+  font-weight: bold;
+  text-shadow: 1px 1px 3px rgba(0,0,0,0.7); /* optional: improves readability */
+  background-color: rgba(0,0,0,0.3);        /* optional: semi-transparent background */
+  padding: 0.25rem 0.5rem;
+  border-radius: var(--radius);
+  font-size: 1rem;          /* adjust size as needed */
 }
 
 .contact-box {
