@@ -22,9 +22,10 @@ def predict_digit(image_base64):
 
     outputs = session.run(None, {input_name: arr})
     logits = outputs[0]
-
+    print(logits)
     exp = np.exp(logits - np.max(logits))
     probs = exp / exp.sum()
+    print(probs)
 
     return {"probabilities": probs.tolist()}
 
