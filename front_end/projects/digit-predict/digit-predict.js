@@ -157,10 +157,10 @@ function updateChart(probabilities) {
     const td = document.querySelector(`#prob-chart td[data-index="${i}"]`);
 
     // Normalize so the largest bar = 1.0
-    const normalized = p / maxVal;
+    //const normalized = p / maxVal;
 
     // Update bar size
-    td.style.setProperty("--size", normalized);
+    td.style.setProperty("--size", p);
 
     // Highlight (remove previous highlights)
     td.classList.toggle("highlight", i === maxIndex);
