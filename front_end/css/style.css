@@ -54,9 +54,7 @@ h1, h2 {
   transform: scale(1.03);
 }
 
-.button-holder {
-  padding: 0.75rem;
-}
+
 
 /* ===== HOME ===== */
 .home-grid {
@@ -294,6 +292,10 @@ h1, h2 {
   min-width: 0;   /* prevents flex overflow issues */
 }
 /* Canvas styling */
+
+#predict, #erase {
+  margin-bottom: 0.75rem;
+}
 
 
 #canvas {
