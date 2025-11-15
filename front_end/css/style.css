@@ -48,6 +48,9 @@ h1, h2 {
   text-decoration: none;
   box-shadow: var(--shadow);
   transition: transform 0.15s ease;
+  border: none;
+  outline: none;
+  cursor: pointer;       /* recommended for buttons */
 }
 
 .button:hover {
@@ -255,7 +258,7 @@ h1, h2 {
 
 /* Demo box */
 .demo-box {
-  padding: 2rem;
+  padding: 1rem;
   border-radius: var(--radius);
   background: var(--accent3);
   box-shadow: var(--shadow);
