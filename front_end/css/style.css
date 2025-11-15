@@ -54,6 +54,10 @@ h1, h2 {
   transform: scale(1.03);
 }
 
+.button-holder {
+  padding: 0.75rem;
+}
+
 /* ===== HOME ===== */
 .home-grid {
   display: grid;
