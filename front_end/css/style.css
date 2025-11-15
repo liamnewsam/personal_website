@@ -300,6 +300,16 @@ h1, h2 {
   margin-bottom: 0.75rem;
 }
 
+#predict {
+  color: white;
+  background-color: var(--accent1);
+}
+
+#erase {
+  color: white;
+  background-color: var(--accent2)
+}
+
 
 #canvas {
   width: 100%;
