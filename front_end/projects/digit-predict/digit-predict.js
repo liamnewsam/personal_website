@@ -111,9 +111,12 @@ document.getElementById('predict').addEventListener('click', async () => {
   );
 
   const result = await response.json();
-  //document.getElementById('result').innerText = `Prediction: ${result.digit}`;
+  
   console.log(result)
   const probs = result.probabilities;
+
+  const predDigit = data.probabilities.indexOf(Math.max(...data.probabilities));
+  document.getElementById('result').innerText = `Prediction: ${predDigit}`;
 
   drawChart(probs);
 });

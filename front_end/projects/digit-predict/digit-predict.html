@@ -7,6 +7,7 @@
 
   <!-- Use the global stylesheet -->
   <link rel="stylesheet" href="../../css/style.css" />
+  <link rel="stylesheet" href="../../css/charts.css-1.2.0/dist/charts.min.css">
 </head>
 <body>
 
@@ -58,10 +59,34 @@
 
             <!-- RIGHT: Vertical Bar Chart -->
              <div id="demo-right-column">
-              <p id="result"></p>
-              <div id="chart-container">
-                
-                <div id="chart"></div>
+              <p id="result">Prediction: </p>
+
+              <div id="my-chart">
+
+                <table class="charts-css bar">
+                  <tbody>
+                    <tr>
+                      <td> $40K </td>
+                    </tr>
+                    <tr>
+                      <td> $60K </td>
+                    </tr>
+                    <tr>
+                      <td> $75K </td>
+                    </tr>
+                    <tr>
+                      <td> $90K </td>
+                    </tr>
+                    <tr>
+                      <td> $100K </td>
+                    </tr>
+                  </tbody>
+                </table>
+
+                <ul class="charts-css legend">
+                  ...
+                </ul>
+
               </div>
             </div>
           </div>
