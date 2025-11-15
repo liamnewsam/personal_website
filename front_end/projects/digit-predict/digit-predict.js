@@ -126,7 +126,7 @@ document.getElementById('predict').addEventListener('click', async () => {
 
 function initializeChart() {
   const tbody = document.querySelector("#prob-chart tbody");
-  tbody.innerHTML = ""; // clear just in case
+  tbody.innerHTML = "";
 
   for (let i = 0; i < 10; i++) {
     const tr = document.createElement("tr");
@@ -136,7 +136,7 @@ function initializeChart() {
     th.textContent = i;
 
     const td = document.createElement("td");
-    td.dataset.index = i;          // useful for updates later
+    td.dataset.index = i;
     td.style.setProperty("--size", 0);
 
     tr.appendChild(th);
@@ -149,14 +149,20 @@ initializeChart();
 
 
 function updateChart(probabilities) {
-  const maxProb = Math.max(...probabilities);
+  // Find the index of the highest probability
+  const maxVal = Math.max(...probabilities);
+  const maxIndex = probabilities.indexOf(maxVal);
 
   probabilities.forEach((p, i) => {
     const td = document.querySelector(`#prob-chart td[data-index="${i}"]`);
 
-    // Charts.css requires --size to be normalized 0 to 1
-    const size = p / maxProb;
+    // Normalize so the largest bar = 1.0
+    const normalized = p / maxVal;
 
-    td.style.setProperty("--size", size);
+    // Update bar size
+    td.style.setProperty("--size", normalized);
+
+    // Highlight (remove previous highlights)
+    td.classList.toggle("highlight", i === maxIndex);
   });
 }

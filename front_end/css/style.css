@@ -325,3 +325,18 @@ h1, h2 {
   top: 0;
   font-size: 12px;
 }
+
+/* Smooth animated resizing of bars */
+#prob-chart td {
+  transition: width 0.35s ease-in-out;
+}
+
+/* Optional: make bars thicker */
+#prob-chart tr {
+  height: 24px;
+}
+
+/* Highlight the highest probability */
+#prob-chart td.highlight {
+  background-color: #ff9800 !important;
+}
