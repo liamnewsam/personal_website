@@ -40,6 +40,16 @@ h1, h2 {
   line-height: 1.2;     /* optional: tighter line spacing */
 }
 
+.button {
+  background: white;
+  border-radius: var(--radius);
+  padding: 0.75rem;
+  color: black;
+  text-decoration: none;
+  box-shadow: var(--shadow);
+  transition: transform 0.15s ease;
+}
+
 /* ===== HOME ===== */
 .home-grid {
   display: grid;
