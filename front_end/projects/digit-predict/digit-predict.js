@@ -115,36 +115,48 @@ document.getElementById('predict').addEventListener('click', async () => {
   console.log(result)
   const probs = result.probabilities;
 
-  const predDigit = data.probabilities.indexOf(Math.max(...data.probabilities));
+  const predDigit = data.probabilities.indexOf(Math.max(...probs));
   document.getElementById('result').innerText = `Prediction: ${predDigit}`;
 
-  drawChart(probs);
+  updateChart(probs);
 });
 
 
 // ------------------ Draw Function ------------------
 
-function drawChart(probabilities) {
-  const chart = document.getElementById("chart");
-  chart.innerHTML = "";  // Clear previous
+function initializeChart() {
+  const tbody = document.querySelector("#prob-chart tbody");
+  tbody.innerHTML = ""; // clear just in case
 
+  for (let i = 0; i < 10; i++) {
+    const tr = document.createElement("tr");
+
+    const th = document.createElement("th");
+    th.scope = "row";
+    th.textContent = i;
+
+    const td = document.createElement("td");
+    td.dataset.index = i;          // useful for updates later
+    td.style.setProperty("--size", 0);
+
+    tr.appendChild(th);
+    tr.appendChild(td);
+    tbody.appendChild(tr);
+  }
+}
+
+initializeChart();
+
+
+function updateChart(probabilities) {
   const maxProb = Math.max(...probabilities);
 
-  probabilities.forEach((p, digit) => {
-    const bar = document.createElement("div");
-    bar.className = "bar";
-    bar.style.height = `${(p / maxProb) * 100}%`;
+  probabilities.forEach((p, i) => {
+    const td = document.querySelector(`#prob-chart td[data-index="${i}"]`);
 
-    const label = document.createElement("div");
-    label.className = "bar-label";
-    label.innerText = digit;
+    // Charts.css requires --size to be normalized 0 to 1
+    const size = p / maxProb;
 
-    const value = document.createElement("div");
-    value.className = "bar-value";
-    value.innerText = p.toFixed(2);
-
-    bar.appendChild(value);
-    bar.appendChild(label);
-    chart.appendChild(bar);
+    td.style.setProperty("--size", size);
   });
 }
