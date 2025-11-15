@@ -115,7 +115,7 @@ document.getElementById('predict').addEventListener('click', async () => {
   console.log(result)
   const probs = result.probabilities;
 
-  const predDigit = data.probabilities.indexOf(Math.max(...probs));
+  const predDigit = probs.indexOf(Math.max(...probs));
   document.getElementById('result').innerText = `Prediction: ${predDigit}`;
 
   updateChart(probs);
