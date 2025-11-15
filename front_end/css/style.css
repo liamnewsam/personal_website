@@ -50,6 +50,10 @@ h1, h2 {
   transition: transform 0.15s ease;
 }
 
+.button:hover {
+  transform: scale(1.03);
+}
+
 /* ===== HOME ===== */
 .home-grid {
   display: grid;
