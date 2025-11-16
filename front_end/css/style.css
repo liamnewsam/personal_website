@@ -320,54 +320,39 @@ h1, h2 {
 }
 
 #chart-container {
+  --scale: min(1.6vw, 16px);  /* master scale */
+  font-size: var(--scale);    /* everything inside scales */
   background-color: var(--bg-color);
 }
 
-/* Vertical stacked chart */
 #chart {
   display: flex;
   flex-direction: column;
-  justify-content: flex-start;
-  gap: 8px;
+  gap: 0.6em;
 }
 
-/* Each bar row */
 .bar {
-  height: 20px;
+  height: 1.3em;
   background-color: steelblue;
   position: relative;
-  transition: width 0.3s;
 }
 
-/* Label on the left */
 .bar-label {
   position: absolute;
-  left: -25px;
+  left: -2.4em;
   top: 0;
-  width: 20px;
+  width: 2em;
   text-align: right;
-  font-size: 12px;
+  font-size: 0.85em;
 }
 
-/* Value text on the right end of bar */
 .bar-value {
   position: absolute;
-  right: -35px;
+  right: -3em;
   top: 0;
-  font-size: 12px;
+  font-size: 0.85em;
 }
 
-/* Smooth animated resizing of bars */
-#prob-chart td {
-  transition: width 0.35s ease-in-out;
-}
-
-/* Optional: make bars thicker */
 #prob-chart tr {
-  height: 24px;
-}
-
-/* Highlight the highest probability */
-#prob-chart td.highlight {
-  background-color: #ff9800 !important;
+  height: 1.4em;
 }
