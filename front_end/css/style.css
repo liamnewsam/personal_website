@@ -340,7 +340,7 @@ h1, h2 {
 
 /* Make label digits large */
 #prob-chart th {
-  font-size: 1.25rem;
+  font-size: 2rem;
   padding-right: 10px;
   text-align: right;
 }
@@ -348,13 +348,13 @@ h1, h2 {
 /* ========== CONTROL BAR THICKNESS ========== */
 /* Height of each bar row */
 #prob-chart tr {
-  --bar-height: 26px;     /* <-- change this for thicker or thinner bars */
+  --bar-height: 40px;     /* <-- change this for thicker or thinner bars */
   height: var(--bar-height);
 }
 
 /* ========== CONTROL GAP BETWEEN BARS ========== */
 #prob-chart {
-  --data-spacing: 8px;    /* <-- change this for larger/smaller gaps */
+  --data-spacing: 15px;    /* <-- change this for larger/smaller gaps */
 }
 
 /* Optional highlight for max bar */
