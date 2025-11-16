@@ -332,23 +332,22 @@ h1, h2 {
   --color: steelblue;            /* bar color */
 }
 
-/* ========== BAR APPEARANCE ========== */
 #prob-chart td {
-  background-color: var(--color);
-  transition: width 0.3s ease;
   position: relative;
+  background-color: steelblue;
+  overflow: visible;   /* allow label outside bar */
+  transition: width 0.3s ease;
 }
 
-/* Value label anchored to end of bar */
-#prob-chart td::after {
-  content: attr(data-value);  /* we will set this in JS */
+/* value box */
+#prob-chart .bar-value {
   position: absolute;
-  right: -6px;                /* adjust spacing from the end of bar */
   top: 50%;
   transform: translateY(-50%);
+  left: calc(var(--size) * 100% + 6px);  /* just outside bar */
   font-size: 0.9rem;
-  color: black;
   white-space: nowrap;
+  color: black;
   pointer-events: none;
 }
 

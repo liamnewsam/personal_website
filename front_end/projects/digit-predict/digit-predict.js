@@ -142,6 +142,12 @@ function initializeChart() {
     tr.appendChild(th);
     tr.appendChild(td);
     tbody.appendChild(tr);
+
+    const valueSpan = document.createElement("span");
+    valueSpan.className = "bar-value";
+    valueSpan.textContent = "0";
+
+    td.appendChild(valueSpan);
   }
 }
 
@@ -162,7 +168,8 @@ function updateChart(probabilities) {
     // Update bar size
     td.style.setProperty("--size", p);
 
-    td.dataset.value = p.toFixed(3);
+    const span = td.querySelector(".bar-value");
+    span.textContent = p.toFixed(3);
 
     // Highlight (remove previous highlights)
     td.classList.toggle("highlight", i === maxIndex);
