@@ -339,6 +339,8 @@ h1, h2 {
   background-color: steelblue;
   overflow: visible;   /* allow label outside bar */
   transition: width 0.3s ease;
+  --bar-height: 80px;     /* <-- change this for thicker or thinner bars */
+  height: var(--bar-height);
 }
 
 /* value box */
@@ -359,8 +361,7 @@ h1, h2 {
   font-size: 2rem;
   padding-right: 10px;
   text-align: right;
-  --bar-height: 80px;     /* <-- change this for thicker or thinner bars */
-  height: var(--bar-height);
+
 }
 
 /* ========== CONTROL GAP BETWEEN BARS ========== */
