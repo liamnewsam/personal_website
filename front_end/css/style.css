@@ -319,7 +319,7 @@ h1, h2 {
   border-radius: var(--radius);
 }
 
-#char-container {
+#chart-container {
   background-color: var(--bg-color);
 }
 
