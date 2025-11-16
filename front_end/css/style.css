@@ -345,7 +345,7 @@ h1, h2 {
   top: 50%;
   transform: translateY(-50%);
   /*left: calc(var(--size) * 100% + 6px);  /* just outside bar */
-  right: 0;
+  right: -50px;
   font-size: 0.9rem;
   white-space: nowrap;
   color: black;
