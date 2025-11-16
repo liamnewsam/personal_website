@@ -364,7 +364,7 @@ h1, h2 {
 /* ========== CONTROL BAR THICKNESS ========== */
 /* Height of each bar row */
 #prob-chart tr {
-  --bar-height: 40px;     /* <-- change this for thicker or thinner bars */
+  --bar-height: 80px;     /* <-- change this for thicker or thinner bars */
   height: var(--bar-height);
 }
 
