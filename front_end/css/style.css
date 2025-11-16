@@ -359,11 +359,6 @@ h1, h2 {
   font-size: 2rem;
   padding-right: 10px;
   text-align: right;
-}
-
-/* ========== CONTROL BAR THICKNESS ========== */
-/* Height of each bar row */
-#prob-chart tr {
   --bar-height: 80px;     /* <-- change this for thicker or thinner bars */
   height: var(--bar-height);
 }
