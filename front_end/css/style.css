@@ -50,11 +50,12 @@ h1, h2 {
   transition: transform 0.15s ease;
   border: none;
   outline: none;
-  cursor: pointer;       /* recommended for buttons */
+  
 }
 
 .button:hover {
   transform: scale(1.03);
+  cursor: pointer;       /* recommended for buttons */
 }
 
 
@@ -296,7 +297,7 @@ h1, h2 {
 }
 /* Canvas styling */
 
-#predict, #erase {
+#predict, #erase #result  {
   margin-bottom: 0.75rem;
 }
 
@@ -311,19 +312,14 @@ h1, h2 {
 }
 
 
-#canvas {
+#canvas, #chart-container {
   width: 100%;
   height: auto;   /* keep aspect ratio */
   aspect-ratio: 1 / 1;
   border-radius: var(--radius);
 }
 
-/* Bar chart container (fixed width on the side) */
-#chart-container {
-  width: 150px;
-  border: 1px solid #ccc;
-  padding: 10px;
-}
+
 
 /* Vertical stacked chart */
 #chart {
