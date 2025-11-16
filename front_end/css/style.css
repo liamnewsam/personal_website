@@ -330,6 +330,8 @@ h1, h2 {
   width: 100%;
   max-width: 400px;
   --color: steelblue;            /* bar color */
+  margin:0;
+  padding: 2rem;
 }
 
 #prob-chart td {
