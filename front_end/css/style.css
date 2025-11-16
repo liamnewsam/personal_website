@@ -339,8 +339,7 @@ h1, h2 {
   background-color: steelblue;
   overflow: visible;   /* allow label outside bar */
   transition: width 0.3s ease;
-  --bar-height: 80px;     /* <-- change this for thicker or thinner bars */
-  height: var(--bar-height);
+  
 }
 
 /* value box */
@@ -365,6 +364,11 @@ h1, h2 {
 }
 
 /* ========== CONTROL GAP BETWEEN BARS ========== */
+#prob-chart tr {
+  --bar-height: 80px;     /* <-- change this for thicker or thinner bars */
+  height: var(--bar-height);
+}
+
 #prob-chart {
   --data-spacing: 15px;    /* <-- change this for larger/smaller gaps */
 }
