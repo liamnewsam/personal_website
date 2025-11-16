@@ -325,43 +325,39 @@ h1, h2 {
 
 
 
-/* Each bar row */
-.bar {
-  height: 20px;
-  background-color: steelblue;
-  position: relative;
-  transition: width 0.3s;
+/* ========== BASIC TABLE RESET ========== */
+#prob-chart {
+  width: 100%;
+  max-width: 400px;
+  --color: steelblue;            /* bar color */
 }
 
-/* Label on the left */
-.bar-label {
-  /*position: absolute;*/
-  /*left: -25px;*/
-  top: 0;
-  width: 20px;
-  text-align: right;
-  font-size: 12px;
-}
-
-/* Value text on the right end of bar */
-.bar-value {
-  position: absolute;
-  right: -35px;
-  top: 0;
-  font-size: 12px;
-}
-
-/* Smooth animated resizing of bars */
+/* ========== BAR APPEARANCE ========== */
 #prob-chart td {
-  transition: width 0.35s ease-in-out;
+  background-color: var(--color);
+  transition: width 0.3s ease;
 }
 
-/* Optional: make bars thicker */
+/* Make label digits large */
+#prob-chart th {
+  font-size: 1.25rem;
+  padding-right: 10px;
+  text-align: right;
+}
+
+/* ========== CONTROL BAR THICKNESS ========== */
+/* Height of each bar row */
 #prob-chart tr {
-  height: 24px;
+  --bar-height: 26px;     /* <-- change this for thicker or thinner bars */
+  height: var(--bar-height);
 }
 
-/* Highlight the highest probability */
+/* ========== CONTROL GAP BETWEEN BARS ========== */
+#prob-chart {
+  --data-spacing: 8px;    /* <-- change this for larger/smaller gaps */
+}
+
+/* Optional highlight for max bar */
 #prob-chart td.highlight {
-  background-color: #ff9800 !important;
+  background-color: dodgerblue;
 }
