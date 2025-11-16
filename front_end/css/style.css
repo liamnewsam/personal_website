@@ -336,6 +336,20 @@ h1, h2 {
 #prob-chart td {
   background-color: var(--color);
   transition: width 0.3s ease;
+  position: relative;
+}
+
+/* Value label anchored to end of bar */
+#prob-chart td::after {
+  content: attr(data-value);  /* we will set this in JS */
+  position: absolute;
+  right: -6px;                /* adjust spacing from the end of bar */
+  top: 50%;
+  transform: translateY(-50%);
+  font-size: 0.9rem;
+  color: black;
+  white-space: nowrap;
+  pointer-events: none;
 }
 
 /* Make label digits large */

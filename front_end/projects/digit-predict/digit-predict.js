@@ -162,6 +162,8 @@ function updateChart(probabilities) {
     // Update bar size
     td.style.setProperty("--size", p);
 
+    td.dataset.value = p.toFixed(3);
+
     // Highlight (remove previous highlights)
     td.classList.toggle("highlight", i === maxIndex);
   });
