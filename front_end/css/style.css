@@ -297,7 +297,7 @@ h1, h2 {
 }
 /* Canvas styling */
 
-#predict, #erase #result  {
+#predict, #erase, #result  {
   margin-bottom: 0.75rem;
 }
 
@@ -308,7 +308,7 @@ h1, h2 {
 
 #erase {
   color: white;
-  background-color: var(--accent2)
+  background-color: var(--accent2);
 }
 
 
@@ -319,7 +319,9 @@ h1, h2 {
   border-radius: var(--radius);
 }
 
-
+#char-container {
+  background-color: var(--bg-color);
+}
 
 /* Vertical stacked chart */
 #chart {
