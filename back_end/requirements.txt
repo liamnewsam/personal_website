@@ -1,5 +1,7 @@
 flask
+flask_socketio
 Flask-CORS
 Pillow
 numpy
 onnxruntime
+eventlet

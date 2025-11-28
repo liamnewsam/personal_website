@@ -1,0 +1,3 @@
+ESCAPE = "q"
+
+HIDDEN_KEYS = [ESCAPE]
