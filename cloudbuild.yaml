@@ -29,6 +29,10 @@ steps:
 images:
   - gcr.io/$_AR_PROJECT_ID/$_AR_REPOSITORY/$REPO_NAME/$_SERVICE_NAME:$COMMIT_SHA
 
+options:
+  logging: CLOUD_LOGGING_ONLY
+
+
 substitutions:
   _AR_PROJECT_ID: fresh-circle-478122-b7
   _AR_REPOSITORY: cloud-run-source-deploy
