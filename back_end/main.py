@@ -3,6 +3,7 @@ from digit_prediction import predict_digit
 from flask import Flask, request, jsonify
 from flask_cors import CORS  # NEW
 import os
+# asdf
 
 app = Flask(__name__)
 CORS(app)
