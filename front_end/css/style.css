@@ -257,6 +257,12 @@ h1, h2 {
   color: var(--accent2);
 }
 
+.project-section img {
+  max-width: 100%;
+  display: block;
+  border-radius: var(--radius);
+}
+
 /* Demo box */
 .demo-box {
   padding: 1rem;
