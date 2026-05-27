@@ -320,9 +320,15 @@ h1, h2 {
 
 #canvas, #chart-container {
   width: 100%;
-  height: auto;   /* keep aspect ratio */
+  height: auto;
   aspect-ratio: 1 / 1;
   border-radius: var(--radius);
+}
+
+#canvas {
+  cursor: crosshair;
+  touch-action: none;   /* prevent scroll-hijack while drawing on mobile */
+  display: block;       /* remove inline baseline gap */
 }
 
 #chart-container {
@@ -331,55 +337,65 @@ h1, h2 {
 
 
 
-/* ========== BASIC TABLE RESET ========== */
+/* ========== BAR CHART ========== */
 #prob-chart {
   width: 100%;
-  max-width: 400px;
-  --color: steelblue;            /* bar color */
-  margin:0;
-  padding: 2rem;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  gap: 3px;
+  padding: 0.75rem 1rem;
+  box-sizing: border-box;
 }
 
-#prob-chart td {
-  position: relative;
-  background-color: steelblue;
-  overflow: visible;   /* allow label outside bar */
-  transition: width 0.3s ease;
-  
+.bar-row {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  flex: 1;
+  min-height: 0;
 }
 
-/* value box */
-#prob-chart .bar-value {
-  position: absolute;
-  top: 50%;
-  transform: translateY(-50%);
-  /*left: calc(var(--size) * 100% + 6px);  /* just outside bar */
-  right: -50px;
-  font-size: 0.9rem;
-  white-space: nowrap;
-  color: black;
-  pointer-events: none;
-}
-
-/* Make label digits large */
-#prob-chart th {
-  font-size: 2rem;
-  padding-right: 10px;
+.bar-label {
+  width: 1.1rem;
+  font-size: 0.95rem;
+  font-weight: 700;
   text-align: right;
-
+  flex-shrink: 0;
+  color: var(--text-color);
 }
 
-/* ========== CONTROL GAP BETWEEN BARS ========== */
-#prob-chart tr {
-  --bar-height: 80px;     /* <-- change this for thicker or thinner bars */
-  height: var(--bar-height);
+.bar-track {
+  flex: 1;
+  background: rgba(0, 0, 0, 0.08);
+  border-radius: 6px;
+  height: 60%;
+  overflow: hidden;
 }
 
-#prob-chart {
-  --data-spacing: 15px;    /* <-- change this for larger/smaller gaps */
+.bar-fill {
+  height: 100%;
+  width: 0%;
+  background: var(--accent2);
+  border-radius: 6px;
+  transition: width 0.35s ease;
 }
 
-/* Optional highlight for max bar */
-#prob-chart td.highlight {
-  background-color: dodgerblue;
+.bar-fill.highlight {
+  background: var(--accent1);
+}
+
+.bar-pct {
+  width: 3rem;
+  font-size: 0.72rem;
+  font-variant-numeric: tabular-nums;
+  text-align: right;
+  flex-shrink: 0;
+  opacity: 0.7;
+}
+
+@media (max-width: 640px) {
+  #main-container {
+    flex-direction: column;
+  }
 }

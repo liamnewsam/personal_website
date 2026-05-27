@@ -1,29 +1,31 @@
 const canvas = document.getElementById('canvas');
 const ctx = canvas.getContext('2d');
 let drawing = false;
+let lastX = 0;
+let lastY = 0;
 
 
 // ------------------ INITIAL BLACK BACKGROUND ------------------
 function resetCanvas() {
+  // Use rect dimensions (CSS px) since ctx is scaled to CSS-pixel space
+  const rect = canvas.getBoundingClientRect();
   ctx.fillStyle = "black";
-  ctx.fillRect(0, 0, canvas.width, canvas.height);
+  ctx.fillRect(0, 0, rect.width, rect.height);
 }
-resetCanvas();
 
 
 function resizeCanvasForHiDPI() {
   const rect = canvas.getBoundingClientRect();
   const scale = window.devicePixelRatio || 1;
 
-  // Resizing clears the canvas — unavoidable
+  // Setting canvas.width resets context state (including transforms) — unavoidable
   canvas.width = rect.width * scale;
   canvas.height = rect.height * scale;
 
-  // Reset scale
+  // Scale so all drawing calls use CSS-pixel coordinates
   ctx.scale(scale, scale);
 
-  // Redraw the background
-  resetCanvas()
+  resetCanvas();
 }
 
 resizeCanvasForHiDPI();
@@ -31,21 +33,14 @@ window.addEventListener("resize", resizeCanvasForHiDPI);
 
 
 // ------------------ POSITION HELPERS ------------------
+// Always return CSS-pixel coordinates to match the scaled ctx
 function getPos(e) {
   const rect = canvas.getBoundingClientRect();
-  const scaleX = canvas.width / rect.width;
-  const scaleY = canvas.height / rect.height;
-
-  if (e.touches) {
-    return {
-      x: (e.touches[0].clientX - rect.left) * scaleX,
-      y: (e.touches[0].clientY - rect.top) * scaleY
-    };
-  }
-
+  const clientX = e.touches ? e.touches[0].clientX : e.clientX;
+  const clientY = e.touches ? e.touches[0].clientY : e.clientY;
   return {
-    x: e.offsetX * scaleX,
-    y: e.offsetY * scaleY
+    x: clientX - rect.left,
+    y: clientY - rect.top
   };
 }
 
@@ -55,21 +50,34 @@ function startDraw(e) {
   drawing = true;
 
   const { x, y } = getPos(e);
+  lastX = x;
+  lastY = y;
+
+  // Draw a dot so single clicks/taps register
   ctx.beginPath();
-  ctx.moveTo(x, y);
+  ctx.arc(x, y, 10, 0, Math.PI * 2);
+  ctx.fillStyle = "white";
+  ctx.fill();
 }
 
 function moveDraw(e) {
   if (!drawing) return;
+  e.preventDefault();
 
   const { x, y } = getPos(e);
 
-  ctx.lineWidth = 40;
-  ctx.lineCap = "round";
-  ctx.strokeStyle = "white";
-
+  // Begin a new path per segment to avoid re-stroking the entire history
+  ctx.beginPath();
+  ctx.moveTo(lastX, lastY);
   ctx.lineTo(x, y);
+  ctx.lineWidth = 20;
+  ctx.lineCap = "round";
+  ctx.lineJoin = "round";
+  ctx.strokeStyle = "white";
   ctx.stroke();
+
+  lastX = x;
+  lastY = y;
 }
 
 function endDraw() {
@@ -91,6 +99,10 @@ document.getElementById('erase').addEventListener('click', resetCanvas);
 
 // ------------------ PREDICT BUTTON ------------------
 document.getElementById('predict').addEventListener('click', async () => {
+  const btn = document.getElementById('predict');
+  btn.disabled = true;
+  btn.textContent = "Predicting…";
+
   // Downscale to 280x280 for backend
   const small = document.createElement('canvas');
   small.width = 280;
@@ -101,53 +113,63 @@ document.getElementById('predict').addEventListener('click', async () => {
 
   const dataUrl = small.toDataURL('image/png');
 
-  const response = await fetch(
-    'https://personal-website-40217740204.europe-west1.run.app/digit-predict',
-    {
-      method: 'POST',
-      headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify({ image: dataUrl })
-    }
-  );
+  try {
+    const response = await fetch(
+      'https://personal-website-40217740204.europe-west1.run.app/digit-predict',
+      {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ image: dataUrl })
+      }
+    );
 
-  const result = await response.json();
-  
-  console.log(result)
-  const probs = result.probabilities;
+    const result = await response.json();
 
-  const predDigit = probs.indexOf(Math.max(...probs));
-  document.getElementById('result').innerText = `Prediction: ${predDigit}`;
+    const probs = result.probabilities;
+    const predDigit = probs.indexOf(Math.max(...probs));
+    document.getElementById('result').innerText = `Prediction: ${predDigit}`;
 
-  updateChart(probs);
+    updateChart(probs);
+  } catch (err) {
+    document.getElementById('result').innerText = 'Error — try again';
+  } finally {
+    btn.disabled = false;
+    btn.textContent = "Predict";
+  }
 });
 
 
-// ------------------ Draw Function ------------------
+// ------------------ CHART ------------------
 
 function initializeChart() {
-  const tbody = document.querySelector("#prob-chart tbody");
-  tbody.innerHTML = "";
+  const chart = document.getElementById("prob-chart");
+  chart.innerHTML = "";
 
   for (let i = 0; i < 10; i++) {
-    const tr = document.createElement("tr");
+    const row = document.createElement("div");
+    row.className = "bar-row";
 
-    const th = document.createElement("th");
-    th.scope = "row";
-    th.textContent = i;
+    const label = document.createElement("span");
+    label.className = "bar-label";
+    label.textContent = i;
 
-    const td = document.createElement("td");
-    td.dataset.index = i;
-    td.style.setProperty("--size", 0);
+    const track = document.createElement("div");
+    track.className = "bar-track";
 
-    tr.appendChild(th);
-    tr.appendChild(td);
-    tbody.appendChild(tr);
+    const fill = document.createElement("div");
+    fill.className = "bar-fill";
+    fill.dataset.index = i;
+    track.appendChild(fill);
 
-    const valueSpan = document.createElement("span");
-    valueSpan.className = "bar-value";
-    valueSpan.textContent = "0";
+    const pct = document.createElement("span");
+    pct.className = "bar-pct";
+    pct.dataset.pct = i;
+    pct.textContent = "0.000";
 
-    td.appendChild(valueSpan);
+    row.appendChild(label);
+    row.appendChild(track);
+    row.appendChild(pct);
+    chart.appendChild(row);
   }
 }
 
@@ -155,23 +177,14 @@ initializeChart();
 
 
 function updateChart(probabilities) {
-  // Find the index of the highest probability
-  const maxVal = Math.max(...probabilities);
-  const maxIndex = probabilities.indexOf(maxVal);
+  const maxIndex = probabilities.indexOf(Math.max(...probabilities));
 
   probabilities.forEach((p, i) => {
-    const td = document.querySelector(`#prob-chart td[data-index="${i}"]`);
+    const fill = document.querySelector(`.bar-fill[data-index="${i}"]`);
+    fill.style.width = `${(p * 100).toFixed(1)}%`;
+    fill.classList.toggle("highlight", i === maxIndex);
 
-    // Normalize so the largest bar = 1.0
-    //const normalized = p / maxVal;
-
-    // Update bar size
-    td.style.setProperty("--size", p);
-
-    const span = td.querySelector(".bar-value");
-    span.textContent = p.toFixed(3);
-
-    // Highlight (remove previous highlights)
-    td.classList.toggle("highlight", i === maxIndex);
+    const pct = document.querySelector(`.bar-pct[data-pct="${i}"]`);
+    pct.textContent = p.toFixed(3);
   });
 }
