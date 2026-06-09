@@ -12,13 +12,15 @@
 
   <div class="project-page">
 
-    <!-- Project Title -->
-    <h1 class="project-title">W101 RL Agent</h1>
+    <a href="#" class="button demo-button">W101 Demo</a>
 
-    <!-- Short Description -->
-    <p class="project-subtitle">
-      Training wizards to save The Spiral!
-    </p>
+    <div class="project-header">
+      <div>
+        <h1 class="project-title">W101 RL Agent</h1>
+        <p class="project-subtitle">Training wizards to save The Spiral!</p>
+      </div>
+      <a href="../../index.html" class="back-button back-top">← Back to Home</a>
+    </div>
 
     <!-- Content Section -->
     <div class="project-content">
@@ -29,28 +31,265 @@
           In the video game Wizard101, players can battle enemies in a 2-sided card game. Cards can deal damage, heal, enhance future cards plays, and more. 
           The player's team wins when all enemies have 0 health, and vise versa. Associated with each player and card is a "school" of magic: Life, Death, Fire, 
           Ice, Storm, Myth, and Balance. 
-          
-          In this project, I set out to create competitive agents that utilize effective card combinations.
         </p>
-      </section>
-
-      <section class="project-section">
-        <h2>RL Summary</h2>
         <p>
-          Test
+          In this project, I set out to create competitive agents. I recreated the card game in python so I could simulate games and allow for RL training.
+          I also made a website to demo the game. The link is at the top.
         </p>
+
+        <img src="../../assets/w101/w101_transform.png">
       </section>
 
       <section class="project-section">
-        <h2>Web Demo Summary</h2>
+        <h2>Methodology</h2>
         <p>
-          Test
+          I divided the agent into 7 sub-agents, 1 agent per school of magic. I chose this because each school of magic has distinct strengths
+          and weaknesses which would conflict if trained under the same model. All were trained in 1v1 combat. A transformer architecture was used
+          which took in embedded tokens of game state, player state, and card state. The model has several heads for the various action types,
+          which output logits for all possible actions. After masking out prohibited actions, the highest logit is chosen as the player action.
+        </p>
+
+        <img src="../../assets/w101/agent_architecture.png">
+        
+        <p>
+          Below shows how player actions are masked. First, the playability of a card is checked, then which players the card can be used on.
+        </p>
+
+        <img src="../../assets/w101/masked_actions.png">
+
+        <p>
+          Below shows some of the information I used in the token embeddings.
+        </p>
+
+        <img src="../../assets/w101/embedded_information.png">
+
+        <div class="table-wrap">
+          <table>
+            <thead>
+              <tr>
+                <th>Token Type</th>
+                <th>Description</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>Card Token</td>
+                <td>Cost, school, conditions, effects, place (hand/deck/expended)</td>
+              </tr>
+              <tr>
+                <td>Player Token</td>
+                <td>Health, pips, school</td>
+              </tr>
+              <tr>
+                <td>Game Token</td>
+                <td>Round, player's pip select</td>
+              </tr>
+              <tr>
+                <td>Hanging Effect Token</td>
+                <td>Owner, type (charm/curse/jinx/ward), amount, aspect, etc.</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+
+        <p>
+        Here is an example of the layout of a card token. Specifically, the Tribunal Oni card had the longest card description (and from which I derived
+        the token size from).
+        </p>
+
+        <img src="../../assets/w101/largest_token_size.png">
+
+        <p> 
+          I chose to train the model with PPO because of my access to computationally cheap simulations of games and because actor-critic methods
+          have been historically used for game playing (eg. AlphaStar, AlphaGo, AlphaZero). A value head on the transformer was used for the critic. GAE was used for advantages. Rewards were as follows:
+        </p>
+
+        <div class="table-wrap">
+          <table>
+            <thead>
+              <tr>
+                <th>Event</th>
+                <th>Reward</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>Player Wins</td>
+                <td>1</td>
+              </tr>
+              <tr>
+                <td>Player Loses</td>
+                <td>-1</td>
+              </tr>
+              <tr>
+                <td>Player Passes Their Turn</td>
+                <td>-0.0005</td>
+              </tr>
+              <tr>
+                <td>Enemy takes damage</td>
+                <td> 0.05 * damage amount / enemy's max health</td>
+              </tr>
+              <tr>
+                <td>Player misses out on receiving a pip because they have too many (max of 7 pips allowed)</td>
+                <td>-0.05</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+
+        <p>
+          I also included an evolutionary search for better deck states, but I restricted the search to only cards within an agent's school.
+        </p>
+        <p>
+          Because the goal was to get a better-than-guessing agent, the opponent during training was always a opponent with a strong deck configuration that randomly chose actions.
         </p>
       </section>
 
       <section class="project-section">
-        <h2>Performance</h2>
-        <img src="../../assets/w101_full.png"/>
+        <h2>Experiment Setup</h2>
+        <p>
+          I divided training into 2 distinct phases: the first phase locks the agent's deck to a pre-defined configuration and is intended to
+          produce a competent agent; the second phase allows decks to evolve while the agent continues to learn, hopefully leading to discovery
+          of new strategies.
+        </p>
+        <p>
+          In phase 1, the agent is faced against increasingly stronger opponents. At each new opponent, the agent is required to reach a certain win rate 
+          in order to advance to the next opponent. To prevent the agent from overfitting to the pre-configured deck, every game a fraction of the deck cards 
+          were replaced by random cards from the agent's school.
+          By the end of phase 1, the opponent is facing an opponent at the same level (level dictates the players stats, 
+          such as health, damage bonus, etc). 
+        </p>
+        <p>
+          In phase 2, evolutionary deck building is added, and the agent continues competing against a same-level opponent.
+        </p>
+
+        <img src="../../assets/w101/training_stages.png">
+      </section>
+
+      <section class="project-section">
+        <h2>Results</h2>
+        <p>
+          First, there is a large disparity in performance between schools when randomly choosing actions. Presented below are the win rates of 1v1s where 
+          both players randomly choose cards. (Each school has a predefined deck configuration which allows it to be relatively competitive).
+        </p>
+        
+        <img src="../../assets/w101/random_vs_random.png" style="max-width: 60%;">
+        
+        <p>
+          Here are the training win-rates of all 7 schools. Several things to note: all schools passed their opponent win-rate thresholds immediately after the 
+          minimum iteration amount, so I could represent each opponent transitation as vertical lines. Secondly, I employed early stopping which would stop training when
+          average performance did not improve over the last N iterations, so some schools did not make it to the very end of training. For all schools, the last iterations were not
+          the best performing ones (though Fire got close).
+        </p>
+
+        <img src="../../assets/w101/training_winrates.png">
+
+        <p>
+          After training, here are the win rates of the agent when playing against a random-action opponent.
+        </p>
+
+        <img src="../../assets/w101/ckpt_vs_random.png" style="max-width: 60%;">
+        
+        <p>
+          These results show significant improvement compared to the random-action player. Below shows the difference in win-rates between a random-action player 
+          and an AI agent:
+        </p>
+
+        <img src="../../assets/w101/ckpt_vs_random_diff.png" style="max-width: 60%;">
+
+        <p>
+          Here are the win rates of AI agents playing against AI agents.
+        </p>
+
+        <img src="../../assets/w101/ckpt_vs_ckpt.png" style="max-width: 60%;">
+        
+
+        <p>
+          Compared to the random-action player v. random-action oppponent, these win rates are much more even, demonstrating that the agent was able
+          to adapt and learn an effective playstyle for their respective school, allowing for better-than-random play.
+        </p>
+
+        <p>
+          Here are the win rates of the AI agent at the end of phase 1 (before deck building was enabled)
+        </p>
+
+        <img src="../../assets/w101/phase1_vs_random.png" style="max-width: 60%;">
+
+        <p>
+          Here, the results show that deck building led to slightly better win rates for Myth, Life, Balance, Death, and Ice, but worse win rates for
+          Fire and Storm. I believe this is because for damage-heavy schools like Fire and Storm, the agent overfitted to a basic strategy during phase 1, and
+          thus could not adapt to new card combinations. To contrast this, schools like Balance and Life experienced harder struggles in phase 1 that necessitated
+          more complex strategies which made them more apt for new cards in the deck building phase.
+        </p>
+
+        <img src="../../assets/w101/ckpt_vs_phase1_diff.png" style="max-width: 60%;">
+        
+      </section>
+
+      <section class="project-section">
+        <h2>Other Attempted Methods</h2>
+        
+        <p>
+          I experimented with many different ideas during development before reaching a successful blueprint. Here, I list some of these ideas.
+        </p>
+
+        <h3>Transformer Deck Builder</h3>
+
+        <p>
+          Before resorting to evolutionary deck building, I tried training a transformer actor critic just like the agent but for deck building. The deck builder
+          used the reward signals received by the agent.
+        </p>
+
+        <p>
+          I tried different strategies of training the deck builder. First, I naively tried to train both the agent and the deck builder immediately, but the produced
+          decks were too weak for the agent to achieve significant rewards to promote learning. I then incorporated a behavior cloning regularizer that would push the
+          deck builder towards the pre-configured deck, but this also led to weak reward signals (from always losing). Finally, I implemented multi-stage training
+          processes where the agent would first learn using a locked pre-configured deck, and then deck building would be enabled. However, the deck builder did not
+          synergize with the agent and both fell into poor performance. A final attempt was to use BC Annealling to wean the agent off of the pre-configured deck, but this
+          also did not lead to good performance. Below is a diagram of how I designed the transformer deck builder.
+        </p>
+
+        <img src="../../assets/w101/transformer_deck_builder.png">
+
+        <h3>Non-Primary School Cards</h3>
+
+        <p>
+          In the real Wizard101 game, strong decks usually include spells from different schools, not just the player's school. While cards from different schools 
+          don't benefit from cheaper costs or player stats, they can lead to extremely powerful strategies when combined with in-school cards.
+        </p>
+        <p>
+          I tried various techniques to allow deck building to incorporate spells from other schools: for the transformer deck builder, I allowed all cards to be available but provided a 
+          logit bonus to in-school cards; in the evolutionary deck builder, I included a small chance that a deck mutates to a card outside of the player's school.
+        </p>
+        <p>
+          Unfortunately, the increased state space was too large for effective learning to take place. Decks would devolve into random assortments of 
+          cards across schools that were weak. The agent would resultingly lose constantly, which led to poor learning, which would then cycle back to the deck builder.
+        </p>
+
+      </section>
+
+      <section class="project-section">
+        <h2>Future Work</h2>
+
+        <p>
+          Here are a couple ideas and to-do's which I can pursue to further polish up this project:
+        </p>
+
+        <ul>
+          <li>I left out several game effects and cards: global effects which impact all players for the rest of the game, auras which are another
+            form of hanging effect, minions which are summonable helper bots, and many more.
+          </li>
+          <li>
+            I could incorporate self-learning, where the agent plays against up-to-date copies of itself, which could lead to stronger policies.
+          </li>
+          <li>
+            I only trained agents in 1v1 combat, but it would be interesting to see whether agents could learn to work well together on a team. 2v2s for example.
+          </li>
+          <li>
+            There are some interesting outliers in the heat maps. For example, Balance's evolutionary deck build checkpoint had a much higher win rate against Ice than Balance's phase 1 final checkpoint.
+            I should spend time looking into why these outliers exist.
+          </li>
+        </ul>
       </section>
 
     </div>
